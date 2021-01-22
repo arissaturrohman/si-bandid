@@ -5,27 +5,27 @@ $action = $_GET["action"];
 
 if ($page == "rpjmdes") {
   if ($action == '') {
-    include "page/rpjmdes/rpjmdes.php";
+    include "page/perencanaan/rpjmdes/rpjmdes.php";
   } elseif ($action == "delete") {
-    include "page/rpjmdes/delete.php";
+    include "page/perencanaan/rpjmdes/delete.php";
   }
 } elseif ($page == "rkpdes") {
   if ($action == '') {
-    include "page/rkpdes/rkpdes.php";
+    include "page/perencanaan/rkpdes/rkpdes.php";
   } elseif ($action == "delete") {
-    include "page/rkpdes/delete.php";
+    include "page/perencanaan/rkpdes/delete.php";
   }
  } elseif ($page == "apbdes") {
   if ($action == '') {
-    include "page/apbdes/apbdes.php";
+    include "page/perencanaan/apbdes/apbdes.php";
   } elseif ($action == "delete") {
-    include "page/apbdes/delete.php";
+    include "page/perencanaan/apbdes/delete.php";
   }
  }  elseif ($page == "apbdes_perub") {
   if ($action == '') {
-    include "page/apbdes_perub/apbdes_perub.php";
+    include "page/perencanaan/apbdes_perub/apbdes_perub.php";
   } elseif ($action == "delete") {
-    include "page/apbdes_perub/delete.php";
+    include "page/perencanaan/apbdes_perub/delete.php";
   }
  } elseif ($page == "") {
   include "dashboard.php";

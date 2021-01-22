@@ -88,7 +88,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
         <div id="collapsepelaksanaan" class="collapse" aria-labelledby="headingpelaksanaan" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Pelaksanaan:</h6>
-            <a class="collapse-item" href="#">RPD</a>
+            <a class="collapse-item" href="?page=rpd">RPD</a>
             <a class="collapse-item" href="#">Realisasi DD</a>
             <a class="collapse-item" href="#">Realisasi ADD</a>
             <a class="collapse-item" href="#">Realisasi PAD</a>
