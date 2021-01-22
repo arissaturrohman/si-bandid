@@ -233,6 +233,8 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
     </div>
   </div>
 
+  
+
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -242,6 +244,13 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
+
+  <script>
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 
 </body>
 
