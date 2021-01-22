@@ -73,8 +73,8 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
             <h6 class="collapse-header">Custom Perencanaan:</h6>
             <a class="collapse-item" href="?page=rpjmdes">RPJMDes</a>
             <a class="collapse-item" href="?page=rkpdes">RKPDes</a>
-            <a class="collapse-item" href="#">APBDes</a>
-            <a class="collapse-item" href="#">APBDes Perubahan</a>
+            <a class="collapse-item" href="?page=apbdes">APBDes</a>
+            <a class="collapse-item" href="?page=apbdes_perub">APBDes Perubahan</a>
           </div>
         </div>
       </li>
