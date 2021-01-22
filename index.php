@@ -206,7 +206,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
           </ul>
           
           <!-- tombol login tampil jika user belum login, jika sudah login jangan tampilkan -->
-            <a href="login.php" class="btn btn-sm btn-primary btn-user">Login</a>
+            <a href="login.php" class="btn btn-sm btn-primary"><i class="fas fa-sign-in-alt"></i> Login</a>
 
         </nav>
         <!-- End of Topbar -->
