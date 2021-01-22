@@ -33,7 +33,7 @@
               <!-- tombol validasi muncul jika login level admin -->
               <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#rpjmdesModal"><i class="fas fa-check"></i> validasi</a>
               <a href="#" class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit_rpjmdesModal"><i class="fas fa-edit"></i> edit</a>
-              <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
+              <a href="#" onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
             </td>
           </tr>
           <tr>
@@ -50,7 +50,7 @@
               <!-- tombol validasi muncul jika login level admin -->
               <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#rpjmdesModal"><i class="fas fa-check"></i> validasi</a>
               <a href="#" class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit_rpjmdesModal"><i class="fas fa-edit"></i> edit</a>
-              <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
+              <a href="#" onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
             </td>
           </tr>
         </tbody>
