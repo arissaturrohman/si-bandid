@@ -1,29 +1,30 @@
 <h1 class="h3 mb-4 text-gray-800">Halaman RPJMDes</h1>
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <!-- <h6 class="m-0 font-weight-bold text-primary">Data RPJMDes</h6> -->
     <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add_rpjmdesModal">Tambah</a>
   </div>
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
+        <thead class="bg-dark text-white">
           <tr>
             <th width="3%" class="text-center">No</th>
             <th width="5%" class="text-center">Desa</th>
             <th class="text-center">RPJMDes</th>
-            <th class="text-center">Validasi</th>
+            <th width="5%" class="text-center">Validasi</th>
             <th class="text-center">Catatan</th>
-            <th class="text-center">Action</th>
+            <!-- Kolom action tampil jika user sudah login -->
+            <th width="18%" class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="text-center">1</td>
             <td>Mranggen</td>
-            <!-- Bisa di download untuk di koreksi -->
+            <!-- Bisa di download untuk di koreksi, muncul link jika user sudah login jika belum login jangan tampilkan linknya-->
             <td><a href="#">RPJMDes Mranggen</a></td>
-            <!-- Jika catatan revisi kolom berwarna merah kalau di terima warna hijau -->
+
+            <!-- Jika catatan "revisi" kolom berwarna merah kalau "diterima" warna hijau -->
             <td class="bg-danger text-white">Revisi</td>
             <td>Anggaran Tidak sesuai </td>
             <td>
@@ -36,9 +37,10 @@
           <tr>
             <td class="text-center">2</td>
             <td>Banyumeneng</td>
-            <!-- Bisa di download untuk di koreksi -->
+            <!-- Bisa di download untuk di koreksi, muncul link jika user sudah login jika belum login jangan tampilkan linknya-->
             <td><a href="#">RPJMDes Banyumeneng</a></td>
-            <!-- Jika catatan revisi kolom berwarna merah kalau di terima warna hijau -->
+
+            <!-- Jika catatan "revisi" kolom berwarna merah kalau "diterima" warna hijau -->
             <td class="bg-success text-white">Diterima</td>
             <td>Anggaran Tidak sesuai </td>
             <td>
@@ -127,8 +129,8 @@
             <label for="exampleFormControlSelect1">Validasi</label>
             <select class="form-control" id="exampleFormControlSelect1">
               <option>-- Pilih --</option>
-              <option>Revisi</option>
-              <option>Diterima</option>
+              <option value="Revisi">Revisi</option>
+              <option value="Diterima">Diterima</option>
             </select>
           </div>
           <div class="form-group">

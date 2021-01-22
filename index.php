@@ -23,6 +23,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="img/icon_bandit.png" type="image/x-icon">
 
 </head>
 
@@ -32,12 +33,13 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon">
+          <!-- <i class="fas fa-mask"></i> -->
+          <img src="img/icon_bandit.png" width="50%" alt="">
         </div>
         <div class="sidebar-brand-text mx-3">SI BANDID</div>
       </a>
@@ -124,6 +126,31 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
       </li>
 
       <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Setting
+      </div>
+
+      <!-- Nav Item - Setting Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesetting" aria-expanded="true" aria-controls="collapsesetting">
+          <i class="fas fa-fw fa-cogs"></i>
+          <span>Settings</span>
+        </a>
+        <div id="collapsesetting" class="collapse" aria-labelledby="headingsetting" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Pengaturan:</h6>
+            <a class="collapse-item" href="#">Profile</a>
+            <a class="collapse-item" href="#">Ganti Password</a>
+            <!-- Tombol users tampil jika login admin -->
+            <a class="collapse-item" href="#">Users</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
       <!-- Sidebar Toggler (Sidebar) -->
@@ -157,7 +184,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nama User</span>
-                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                <img class="img-profile rounded-circle" src="img/logo_demak.png">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -197,7 +224,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
+            <span>Copyright &copy; Si-Bandid 2020 - <?= date("Y"); ?></span>
           </div>
         </div>
       </footer>
@@ -233,7 +260,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
     </div>
   </div>
 
-  
+
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -246,11 +273,11 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
   <script src="js/sb-admin-2.min.js"></script>
 
   <script>
-        $(".custom-file-input").on("change", function() {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });
-    </script>
+    $(".custom-file-input").on("change", function() {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+  </script>
 
 </body>
 
