@@ -21,7 +21,7 @@
             <td>Mranggen</td>
             <td>ngatemin</td>
             <td>User</td>
-            <td>              
+            <td>
               <a href="#" class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit_userModal"><i class="fas fa-edit"></i> edit</a>
               <a href="#" onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
             </td>
@@ -31,7 +31,7 @@
             <td>Banyumeneng</td>
             <td>ngadmin</td>
             <td>User</td>
-            <td>              
+            <td>
               <a href="#" class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit_userModal"><i class="fas fa-edit"></i> edit</a>
               <a href="#" onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
             </td>
@@ -57,6 +57,9 @@
         <form action="" method="post">
           <div class="form-group">
             <input type="text" class="form-control" id="desa" placeholder="Nama Desa">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="username" placeholder="Username">
           </div>
           <div class="form-group">
             <input type="password" class="form-control" id="password" placeholder="Password">
@@ -90,7 +93,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="" method="post">
+        <form action="" method="post">
           <div class="form-group">
             <input type="text" class="form-control" id="desa" placeholder="Nama Desa">
           </div>
