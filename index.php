@@ -23,7 +23,10 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 
   <!-- Custom styles for this template-->
   <link href="asset/css/sb-admin-2.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="asset/css/ekko-lightbox.css">
   <link rel="shortcut icon" href="asset/img/icon_bandit.png" type="image/x-icon">
+
+  
 
 </head>
 
@@ -89,10 +92,10 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Pelaksanaan:</h6>
             <a class="collapse-item" href="?page=rpd">RPD</a>
-            <a class="collapse-item" href="#">Realisasi DD</a>
-            <a class="collapse-item" href="#">Realisasi ADD</a>
-            <a class="collapse-item" href="#">Realisasi PAD</a>
-            <a class="collapse-item" href="#">Realisasi APBDes</a>
+            <a class="collapse-item" href="?page=p_dd">Realisasi DD</a>
+            <a class="collapse-item" href="?page=p_add">Realisasi ADD</a>
+            <a class="collapse-item" href="?page=p_pad">Realisasi PAD</a>
+            <a class="collapse-item" href="?page=p_apbdes">Realisasi APBDes</a>
             <a class="collapse-item" href="#">Retribusi</a>
             <a class="collapse-item" href="#">SK PKPKD / PPKD</a>
           </div>
@@ -272,7 +275,9 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
   <script src="asset/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="asset/js/sb-admin-2.min.js"></script>
+  <script src="asset/js/sb-admin-2.min.js"></script>  
+  <script src="asset/js/ekko-lightbox.js"></script>
+  <script src="asset/js/ekko-lightbox.min.js"></script>
 
   <script>
     $(".custom-file-input").on("change", function() {
@@ -280,6 +285,13 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
       $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
   </script>
+
+<script>
+      $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+         event.preventDefault();
+         $(this).ekkoLightbox();
+      });
+    </script>
 
 </body>
 
