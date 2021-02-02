@@ -98,50 +98,9 @@
             <input type="text" class="form-control" id="desa" placeholder="Nama Desa">
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" id="password" placeholder="Password">
+            <input type="text" class="form-control" id="usernnnnnname" placeholder="Username">
           </div>
-          <div class="form-group">
-            <label for="level">Level</label>
-            <select class="form-control" id="level">
-              <option>-- Pilih --</option>
-              <option value="User">User</option>
-              <option value="Admin">Admin</option>
-            </select>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-sm btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- Modal validasi user -->
-<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="userModalLabel">Form Validasi User</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="post">
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Validasi</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>-- Pilih --</option>
-              <option value="Revisi">Revisi</option>
-              <option value="Diterima">Diterima</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="catatan">Catatan</label>
-            <textarea class="form-control" id="catatan" rows="3"></textarea>
-          </div>
         </form>
       </div>
       <div class="modal-footer">
