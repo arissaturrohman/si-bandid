@@ -33,6 +33,30 @@ if ($page == "rpjmdes") {
   } elseif ($action == "delete") {
     include "page/pelaksanaan/rpd/delete.php";
   }
+ } elseif ($page == "p_apbdes") {
+  if ($action == '') {
+    include "page/pelaksanaan/apbdes/p_apbdes.php";
+  } elseif ($action == "delete") {
+    include "page/pelaksanaan/apbdes/delete.php";
+  }
+ } elseif ($page == "p_dd") {
+  if ($action == '') {
+    include "page/pelaksanaan/dd/p_dd.php";
+  } elseif ($action == "delete") {
+    include "page/pelaksanaan/dd/delete.php";
+  }
+ } elseif ($page == "p_add") {
+  if ($action == '') {
+    include "page/pelaksanaan/add/p_add.php";
+  } elseif ($action == "delete") {
+    include "page/pelaksanaan/add/delete.php";
+  }
+ } elseif ($page == "p_pad") {
+  if ($action == '') {
+    include "page/pelaksanaan/pad/p_pad.php";
+  } elseif ($action == "delete") {
+    include "page/pelaksanaan/pad/delete.php";
+  }
  } elseif ($page == "profile") {
   if ($action == '') {
     include "page/setting/profile.php";
