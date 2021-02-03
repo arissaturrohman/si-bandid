@@ -1,3 +1,7 @@
+<?php
+ob_start();
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +47,7 @@
                     <br><br>
                     <h1 class="h4 text-gray-900 mb-4">Login Si-Bandid</h1>
                   </div>
-                  <form class="user" method="post">
+                  <form action="cek_login.php" class="user" method="post">
                     <div class="form-group">
                       <input type="text" class="form-control form-control-user" name="username" placeholder="Masukkan Username" autofocus>
                     </div>

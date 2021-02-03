@@ -19,46 +19,107 @@
           </tr>
         </thead>
         <tbody>
+
+          <?php  
+          include "asset/inc/config.php";
+          if ($_SESSION['level']=="admin") {
+             $query = "SELECT * FROM tb_rpjmdes
+                      INNER JOIN tb_user ON tb_rpjmdes.id_user = tb_user.id_user";
+            $result = mysqli_query($koneksi, $query);
+          }
+          if ($_SESSION['level']=="user") {
+            $id_user = $_SESSION['id_user'];
+            $query= "SELECT * FROM tb_rpjmdes
+                      INNER JOIN tb_user ON tb_rpjmdes.id_user = tb_user.id_user AND tb_rpjmdes.id_user=$id_user";
+            $result = mysqli_query($koneksi, $query);
+          }  
+            //mengecek apakah ada error ketika menjalankan query
+            if(!$result){
+              die ("Query Error: ".mysqli_errno($koneksi).
+                 " - ".mysqli_error($koneksi));
+            }
+            //buat perulangan untuk element tabel dari data rpjmdes
+            $no = 1;
+            while($data = mysqli_fetch_assoc($result))
+            {
+            ?>
           <tr>
-            <td class="text-center">1</td>
-            <td>Mranggen</td>
+            <td class="text-center"><?php echo "$no"; ?></td>
+            <td><?php echo $data['nama_user']; ?></td>
             <!-- Bisa di download untuk di koreksi, muncul link jika user sudah login jika belum login jangan tampilkan linknya-->
-            <td><a href="#">RPJMDes Mranggen</a></td>
-            <td><a href="#">Perdes RPJMDes Mranggen</a></td>
+            <td>
+              <a href="file/rpjmdes/<?php echo $data['rpjmdes']; ?>">
+             <!--  <?php
+                 if (!isset($_SESSION['username'])){
+                echo "<script>var elm = document.getElementById('downloadrpjmdes');
+                      elm.style.display = 'none';</script>";
+                }
+              ?> -->
+              <i class="fas fa-download" id="downloadrpjmdes">&nbsp;&nbsp;</i></a><?php echo $data['rpjmdes']; ?>
+            </td>
+            <!-- <?php
+                 if (!isset($_SESSION['username'])){
+                echo "<script>var elm = document.getElementById('downloadperdes');
+                      elm.style.display = 'none';</script>";
+                }
+              ?> -->
+            <td><a href="file/perdes/<?php echo $data['perdes']; ?>"><i class="fas fa-download" id="downloadperdes">&nbsp;&nbsp;</i></a><?php echo $data['perdes']; ?></td>
 
             <!-- Jika catatan "revisi" kolom berwarna merah kalau "diterima" warna hijau -->
-            <td class="bg-danger text-white">Revisi</td>
-            <td>Anggaran Tidak sesuai </td>
+            <?php 
+              $validasi = $data['validasi'];
+              $jumlah_karakter    =strlen($validasi);
+              if ($jumlah_karakter == 6) {
+              $color = "class='bg-danger text-white';";
+              }elseif ($jumlah_karakter == 8){
+              $color = "class='bg-success text-white';";
+              }elseif ($jumlah_karakter > 8){
+              $color = "class='bg-info text-white';";
+              }
+              ?>
+            <td <?= $color ?> ><?php echo $validasi; ?></td>
+            <td><?php echo $data['catatan']; ?></td>
             <td>
               <!-- tombol validasi muncul jika login level admin -->
-              <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#rpjmdesModal"><i class="fas fa-check"></i> validasi</a>
-              <a href="#" class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit_rpjmdesModal"><i class="fas fa-edit"></i> edit</a>
-              <a href="#" onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
-            </td>
-          </tr>
-          <tr>
-            <td class="text-center">2</td>
-            <td>Banyumeneng</td>
-            <!-- Bisa di download untuk di koreksi, muncul link jika user sudah login jika belum login jangan tampilkan linknya-->
-            <td><a href="#">RPJMDes Banyumeneng</a></td>
-            <td><a href="#">Perdes RPJMDes Banyumeneng</a></td>
+              <?php 
+                if ($_SESSION['level']=="admin") {
+                 echo ''?> <a href="#" class="btn btn-sm btn-success validasi" data-toggle="modal" data-target="#rpjmdesModal" 
+                      data-idrpjmdes="<?php echo $data["id_rpjmdes"];?>"
+                      data-rpjmdes="<?php echo $data["rpjmdes"];?>"
+                      data-perdes="<?php echo $data["perdes"];?>"
+                      data-iduser="<?php echo $data["id_user"];?>"
+                      data-tahun="<?php echo $data["tahun"];?>"
+                      data-validasi="<?php echo $data["validasi"];?>"
+                      data-catatan="<?php echo $data["catatan"];?>"
+                      ><i class="fas fa-check"></i> validasi</a>
+                <?php  ;
+                }else{
+                 echo '';
+                }
+               ?>
 
-            <!-- Jika catatan "revisi" kolom berwarna merah kalau "diterima" warna hijau -->
-            <td class="bg-success text-white">Diterima</td>
-            <td>Anggaran Tidak sesuai </td>
-            <td>
-              <!-- tombol validasi muncul jika login level admin -->
-              <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#rpjmdesModal"><i class="fas fa-check"></i> validasi</a>
-              <a href="#" class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit_rpjmdesModal"><i class="fas fa-edit"></i> edit</a>
-              <a href="#" onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
+              <a href="#" class="btn btn-sm btn-info edit" data-toggle="modal" data-target="#edit_rpjmdesModal"
+              data-id_rpjmdes="<?php echo $data['id_rpjmdes'];?>"
+              data-rpjmdes="<?php echo $data['rpjmdes'];?>"
+              data-perdes="<?php echo $data['perdes'];?>"
+              data-iduser="<?php echo $data['id_user'];?>"
+              data-tahun="<?php echo $data['tahun'];?>"
+              data-validasi="<?php echo $data['validasi'];?>"
+              data-catatan="<?php echo $data['catatan'];?>"
+              ><i class="fas fa-edit"></i> edit</a>
+
+              <a href="page/perencanaan/rpjmdes/hapus.php?id_rpjmdes=<?php echo $data['id_rpjmdes'];?>" onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
             </td>
           </tr>
+          <?php
+          $no++;
+          }
+          ?>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-
 
 <!-- Modal add rpjmdes -->
 <div class="modal fade" id="add_rpjmdesModal" tabindex="-1" aria-labelledby="rpjmdesModalLabel" aria-hidden="true">
@@ -71,32 +132,70 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
+        <form method="POST" action="page/perencanaan/rpjmdes/tambah.php" enctype="multipart/form-data" >
+          <input type="hidden" name="valid" id="valid" value="Menunggu Validasi">
+          <input type="hidden" name="id_user" id="iduser" value="<?= $_SESSION['id_user']; ?>">
+          <input type="hidden" name="tahun" id="tahun" value="<?= date("Y-m-d"); ?>">
           <div class="form-group">
             <label for="">File RPJMDes</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
+              <input type="file" class="custom-file-input" id="rpjmdes" name="rpjmdes" required="" onchange="return validasiFile()"/>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
           <div class="form-group">
             <label for="">Perdes RPJMDes</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
+              <input type="file" class="custom-file-input" id="perdes" name="perdes" required="" onchange="return validasiFile()"/>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
           <span class="text-danger"><small>* File yang diperbolehkan Excel, Word & pdf </small></span><br>
           <span class="text-danger"><small>* Ukuran file maksimal 5mb</small></span>
-        </form>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-sm btn-primary">Save changes</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+var uploadField = document.getElementById("rpjmdes");
+uploadField.onchange = function() {
+    if(this.files[0].size > 5000000){ // ini untuk ukuran 800KB, 1000000 untuk 1 MB.
+       alert("Maaf. File Terlalu Besar ! Maksimal Upload 5 MB");
+       this.value = "";
+    };
+        var inputFile = document.getElementById('rpjmdes');
+        var pathFile = inputFile.value;
+        var ekstensiOk = /(\.pdf|\.xlsx|\.xls|\.doc|\.docx)$/i;
+        if(!ekstensiOk.exec(pathFile)){
+            alert('Silahkan upload file yang memiliki ekstensi .pdf.xlxs.docx');
+            inputFile.value = '';
+            return false;
+        }
+    };
+
+  var uploadField = document.getElementById("perdes");
+  uploadField.onchange = function() {
+    if(this.files[0].size > 5000000){ // ini untuk ukuran 800KB, 1000000 untuk 1 MB.
+       alert("Maaf. File Terlalu Besar ! Maksimal Upload 5 MB");
+       this.value = "";
+    };
+        var inputFile = document.getElementById('perdes');
+        var pathFile = inputFile.value;
+        var ekstensiOk = /(\.pdf|\.xlsx|\.xls|\.doc|\.docx)$/i;
+        if(!ekstensiOk.exec(pathFile)){
+            alert('Silahkan upload file yang memiliki ekstensi .pdf.xlxs.docx');
+            inputFile.value = '';
+            return false;
+        }
+    };
+</script>
 
 <!-- Modal edit rpjmdes -->
 <div class="modal fade" id="edit_rpjmdesModal" tabindex="-1" aria-labelledby="rpjmdesModalLabel" aria-hidden="true">
@@ -107,34 +206,56 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div> 
       <div class="modal-body">
-        <form action="" method="post">
+        <form action="page/perencanaan/rpjmdes/edit.php" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="id_rpjmdes" id="id_rpjmdes">
           <div class="form-group">
-          <label for="">File RPJMDes</label>
+          <label for="rpjmdes">File RPJMDes</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
+              <input type="file" class="custom-file-input" name="rpjmdes" id="rpjmdes" required="">
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
           <div class="form-group">
-          <label for="">Perdes RPJMDes</label>
+          <label for="perdes">Perdes RPJMDes</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
+              <input type="file" class="custom-file-input" name="perdes" id="perdes" required="">
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
           <span class="text-danger"><small>* File yang diperbolehkan Excel, Word & pdf </small></span><br>
           <span class="text-danger"><small>* Ukuran file maksimal 5mb</small></span>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-sm btn-primary" name="update">Save changes</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
+
+<script src="asset/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+  $('.edit').click(function(){
+    $('#edit_rpjmdesModal').modal();
+    var id_rpjmdes = $(this).attr('data-id_rpjmdes')
+    var rpjmdes = $(this).attr('data-rpjmdes')
+    var perdes = $(this).attr('data-perdes')
+    var id_user = $(this).attr('data-iduser')
+    var tahun = $(this).attr('data-tahun')
+    var validasi = $(this).attr('data-validasi')
+    var catatan = $(this).attr('data-catatan')
+    $('#id_rpjmdes').val(id_rpjmdes)
+    $('#rpjmdes').val(rpjmdes)
+    $('#perdes').val(perdes)
+    $('#iduser').val(id_user)
+    $('#tahun').val(tahun)
+    $('#validasi').val(validasi)
+    $('#catatan').val(catatan)
+  })
+</script>
 
 <!-- Modal validasi rpjmdes -->
 <div class="modal fade" id="rpjmdesModal" tabindex="-1" aria-labelledby="rpjmdesModalLabel" aria-hidden="true">
@@ -145,27 +266,56 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div>  
       <div class="modal-body">
-        <form action="" method="post">
+        <form method="POST" action="page/perencanaan/rpjmdes/validasi.php">
+          <input type="hidden" name="id_rpjmdes" id="idrpjmdes">
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Validasi</label>
-            <select class="form-control" id="exampleFormControlSelect1">
+            <label for="validasi">Validasi</label>
+            <select class="form-control" name="debug" id="validasi" tabindex="-1">
               <option>-- Pilih --</option>
               <option value="Revisi">Revisi</option>
               <option value="Diterima">Diterima</option>
             </select>
+              <script>
+                $(function() {
+                  $("#validasi").on("change", function() {
+                    $("#debug").text($("#validasi").val());
+                  }).trigger("change");
+                });
+              </script>
           </div>
           <div class="form-group">
             <label for="catatan">Catatan</label>
-            <textarea class="form-control" id="catatan" rows="3"></textarea>
+            <textarea class="form-control" name="catatan" id="catatan" rows="3"></textarea>
           </div>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-sm btn-primary" name="validasi">Save changes</button>
       </div>
+        </form>
     </div>
   </div>
 </div>
+
+<script src="asset/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+  $('.validasi').click(function(){
+    $('#rpjmdesModal').modal();
+    var id_rpjmdes = $(this).attr('data-idrpjmdes')
+    var rpjmdes = $(this).attr('data-rpjmdes')
+    var perdes = $(this).attr('data-perdes')
+    var id_user = $(this).attr('data-iduser')
+    var tahun = $(this).attr('data-tahun')
+    var validasi = $(this).attr('data-validasi')
+    var catatan = $(this).attr('data-catatan')
+    $('#idrpjmdes').val(id_rpjmdes)
+    $('#rpjmdes').val(rpjmdes)
+    $('#perdes').val(perdes)
+    $('#iduser').val(id_user)
+    $('#tahun').val(tahun)
+    $('#validasi').val(validasi)
+    $('#catatan').val(catatan)
+  })
+</script>

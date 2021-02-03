@@ -1,8 +1,16 @@
 <?php
+session_start();
+
+if (!isset($_SESSION["username"])) {
+  header("Location: login.php ");
+  exit;
+}
+include "asset/inc/config.php";
 
 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -186,7 +194,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nama User</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username']; ?></span>
                 <img class="img-profile rounded-circle" src="asset/img/logo_demak.png">
               </a>
               <!-- Dropdown - User Information -->
@@ -209,7 +217,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
           </ul>
           
           <!-- tombol login tampil jika user belum login, jika sudah login jangan tampilkan -->
-            <a href="login.php" class="btn btn-sm btn-primary"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="logout.php" class="btn btn-sm btn-primary"><i class="fas fa-sign-in-alt"></i> Logout</a>
 
         </nav>
         <!-- End of Topbar -->
