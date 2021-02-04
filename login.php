@@ -54,6 +54,18 @@ session_start();
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" name="password" placeholder="Masukkan Password">
                     </div>
+                    <div class="form-group">
+                      <select name="tahun" id="" class="form-control">
+                        <?php
+                        $year = date('Y');
+                        for ($i = $year; $i >= 2021; $i--) {
+                        ?>
+                          <option value="<?= $i; ?>"><?= $i; ?></option>
+                        <?php
+                        }
+                        ?>
+                      </select>
+                    </div>
                     <input value="Login" type="submit" name="login" class="btn btn-primary btn-user btn-block">
                 </div>
               </div>

@@ -8,6 +8,7 @@ include 'asset/inc/config.php';
 // menangkap data yang dikirim dari form login
 $username = $_POST['username'];
 $password = $_POST['password'];
+$tahun		= $_POST['tahun'];
 
 // menyeleksi data user dengan username dan password yang sesuai
 $sql = mysqli_query($koneksi,"select * from tb_user where username='$username' and password='$password'");
@@ -20,6 +21,7 @@ if(mysqli_num_rows($sql)==1){
 			$_SESSION['username']	= $qry['username'];
 			$_SESSION['nama_user']	= $qry['nama_user'];
 			$_SESSION['level']	= $qry['level'];
+			$_SESSION['tahun']	= $tahun;
 			
 			if($qry['level']=="admin"){
 				header("location:index.php");
