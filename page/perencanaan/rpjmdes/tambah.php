@@ -1,67 +1,53 @@
 <?php
-// memanggil file koneksi.php untuk melakukan koneksi database
-include '../../../asset/inc/config.php';
+// Check If form submitted, insert form data into users table.
+if(isset($_POST['submit']))
+{
+    $rpjmdes = $_FILES['rpjmdes']['name'];
+    $perdes = $_FILES['perdes']['name'];
+    $valid = $_POST['valid'];
+    $id_user = $_POST['id_user'];
+    $tahun = $_POST['tahun'];
 
-  // membuat variabel untuk menampung data dari form
+// include database connection file
+include_once("../../../asset/inc/config.php");
 
-  $rpjmdes = $_FILES['rpjmdes']['name'];
-  $perdes = $_FILES['perdes']['name'];
-  $validasi = $_POST['valid'];
-  $id_user = $_POST['id_user'];
-  $tahun = $_POST['tahun'];
+  //cek dulu jika ada gambar produk jalankan coding ini
+  if($rpjmdes != "") {
+    $ekstensi_diperbolehkan = array('xlsx','xls','doc','docx','pdf'); //ekstensi file yang bisa diupload 
+    $x = explode('.', $rpjmdes); //memisahkan nama file dengan ekstensi yang diupload
+    $ekstensi = strtolower(end($x));
+    $file_rpjmdes_tmp = $_FILES['rpjmdes']['tmp_name']; 
+    $acak = rand(00000000, 99999999);
+    $rpjmdesExt = substr($rpjmdes, strrpos($rpjmdes, '.')); 
+    $rpjmdesExt = str_replace('.','',$rpjmdesExt); // Extension
+    $rpjmdes = preg_replace("/\.[^.\s]{3,4}$/", "", $rpjmdes); 
+    $nama_rpjmdes_baru = "RPJMDes_".$acak.'.'.$rpjmdesExt;
+    if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)  {     
+      move_uploaded_file($file_rpjmdes_tmp, 'file/rpjmdes/'.$nama_rpjmdes_baru); //memindah file ke folder file/rpjmdes
+    }
+  }
 
-  var_dump($tahun);
+  //cek dulu jika ada gambar produk jalankan coding ini
+  if($perdes != "") {
+    $ekstensi_diperbolehkan = array('xlsx','xls','doc','docx','pdf'); //ekstensi file yang bisa diupload 
+    $x = explode('.', $perdes); //memisahkan nama file dengan ekstensi yang diupload
+    $ekstensi = strtolower(end($x));
+    $file_perdes_tmp = $_FILES['perdes']['tmp_name'];
+    $acak = rand(00000000, 99999999);
+    $perdesExt = substr($perdes, strrpos($perdes, '.')); 
+    $perdesExt = str_replace('.','',$perdesExt); // Extension
+    $perdes = preg_replace("/\.[^.\s]{3,4}$/", "", $perdes);  
+    $nama_perdes_baru = "PERDes_".$acak.'.'.$perdesExt; //menggabungkan angka acak dengan nama file sebenarnya
+    if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)  {     
+      move_uploaded_file($file_perdes_tmp, 'file/perdes/'.$nama_perdes_baru); //memindah file ke folder file/perdes
+    }
+  }
 
-//cek dulu jika ada gambar produk jalankan coding ini
-if($rpjmdes != "") {
-  $ekstensi_diperbolehkan = array('xlsx','xls','doc','docx','pdf'); //ekstensi file gambar yang bisa diupload 
-  $x = explode('.', $rpjmdes); //memisahkan nama file dengan ekstensi yang diupload
-  $ekstensi = strtolower(end($x));
-  $file_rpjmdes_tmp = $_FILES['rpjmdes']['tmp_name'];   
-  $nama_rpjmdes_baru = $rpjmdes; //menggabungkan angka acak dengan nama file sebenarnya
+        // Insert file into table
+        $result = mysqli_query($koneksi, "INSERT INTO tb_rpjmdes(rpjmdes,perdes,id_user,validasi,tahun) VALUES('$nama_rpjmdes_baru','$nama_perdes_baru','$id_user','$valid','$tahun')");
 
-//cek dulu jika ada gambar produk jalankan coding ini
-if($perdes != "") {
-  $ekstensi_diperbolehkan = array('xlsx','xls','doc','docx','pdf'); //ekstensi file gambar yang bisa diupload 
-  $x = explode('.', $perdes); //memisahkan nama file dengan ekstensi yang diupload
-  $ekstensi = strtolower(end($x));
-  $file_perdes_tmp = $_FILES['perdes']['tmp_name'];   
-  $nama_perdes_baru = $perdes; //menggabungkan angka acak dengan nama file sebenarnya
+        // Show message when user added
+        header("Location:../../../index.php?page=rpjmdes");
 
-        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)  {     
-                move_uploaded_file($file_rpjmdes_tmp, '../../../file/rpjmdes/'.$nama_rpjmdes_baru); //memindah file gambar ke folder gambar
-                move_uploaded_file($file_perdes_tmp, '../../../file/perdes/'.$nama_perdes_baru); //memindah file gambar ke folder gambar
-                  // jalankan query INSERT untuk menambah data ke database pastikan sesuai urutan (id tidak perlu karena dibikin otomatis)
-                  $query = "INSERT INTO tb_rpjmdes (rpjmdes, perdes, id_user, tahun, validasi) VALUES ('$rpjmdes', '$perdes', '$id_user', '$tahun', '$validasi')";
-                  $result = mysqli_query($koneksi, $query);
-                  // periska query apakah ada error
-                  if(!$result){
-                      die ("Query gagal dijalankan: ".mysqli_errno($koneksi).
-                           " - ".mysqli_error($koneksi));
-                  } else {
-                    //tampil alert dan akan redirect ke halaman index.php
-                    //silahkan ganti index.php sesuai halaman yang akan dituju
-                    header("Location:../../../index.php?page=rpjmdes");
-                  }
-
-            }
-          } else {     
-             //jika file ekstensi tidak jpg dan png maka alert ini yang tampil
-                echo "<script>alert('Ekstensi file yang diperbolehkan hanya xlsx,docx,pdf');window.location='../../../index.php?page=rpjmdes';</script>";
-            }
-} else {
-   $query = "INSERT INTO tb_rpjmdes (rpjmdes , perdes) VALUES ('$rpjmdes', '$perdes', null)";
-                  $result = mysqli_query($koneksi, $query);
-                  // periska query apakah ada error
-                  if(!$result){
-                      die ("Query gagal dijalankan: ".mysqli_errno($koneksi).
-                           " - ".mysqli_error($koneksi));
-                  } else {
-                    //tampil alert dan akan redirect ke halaman index.php
-                    //silahkan ganti index.php sesuai halaman yang akan dituju
-                    echo "<script>alert('Data berhasil ditambah.');window.location='index.php?page=rpjmdes';</script>";
-                  }
 }
-
- 
-
+?>

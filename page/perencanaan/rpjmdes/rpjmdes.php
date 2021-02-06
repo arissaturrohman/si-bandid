@@ -24,13 +24,13 @@
           include "asset/inc/config.php";
           if ($_SESSION['level']=="admin") {
              $query = "SELECT * FROM tb_rpjmdes
-                      INNER JOIN tb_user ON tb_rpjmdes.id_user = tb_user.id_user";
+                      INNER JOIN tb_user ON tb_rpjmdes.id_user = tb_user.id_user ORDER BY id_rpjmdes DESC";
             $result = mysqli_query($koneksi, $query);
           }
           if ($_SESSION['level']=="user") {
             $id_user = $_SESSION['id_user'];
             $query= "SELECT * FROM tb_rpjmdes
-                      INNER JOIN tb_user ON tb_rpjmdes.id_user = tb_user.id_user AND tb_rpjmdes.id_user=$id_user";
+                      INNER JOIN tb_user ON tb_rpjmdes.id_user = tb_user.id_user AND tb_rpjmdes.id_user=$id_user ORDER BY id_rpjmdes DESC";
             $result = mysqli_query($koneksi, $query);
           }  
             //mengecek apakah ada error ketika menjalankan query
@@ -48,33 +48,30 @@
             <td><?php echo $data['nama_user']; ?></td>
             <!-- Bisa di download untuk di koreksi, muncul link jika user sudah login jika belum login jangan tampilkan linknya-->
             <td>
-              <a href="file/rpjmdes/<?php echo $data['rpjmdes']; ?>">
-             <!--  <?php
-                 if (!isset($_SESSION['username'])){
-                echo "<script>var elm = document.getElementById('downloadrpjmdes');
-                      elm.style.display = 'none';</script>";
-                }
-              ?> -->
+              <a href="page/perencanaan/rpjmdes/file/rpjmdes/<?php echo $data['rpjmdes']; ?>">
               <i class="fas fa-download" id="downloadrpjmdes">&nbsp;&nbsp;</i></a><?php echo $data['rpjmdes']; ?>
             </td>
-            <!-- <?php
-                 if (!isset($_SESSION['username'])){
-                echo "<script>var elm = document.getElementById('downloadperdes');
-                      elm.style.display = 'none';</script>";
-                }
-              ?> -->
-            <td><a href="file/perdes/<?php echo $data['perdes']; ?>"><i class="fas fa-download" id="downloadperdes">&nbsp;&nbsp;</i></a><?php echo $data['perdes']; ?></td>
+            <td><a href="page/perencanaan/rpjmdes/file/perdes/<?php echo $data['perdes']; ?>"><i class="fas fa-download" id="downloadperdes">&nbsp;&nbsp;</i></a><?php echo $data['perdes']; ?></td>
 
             <!-- Jika catatan "revisi" kolom berwarna merah kalau "diterima" warna hijau -->
             <?php 
               $validasi = $data['validasi'];
               $jumlah_karakter    =strlen($validasi);
+              // revisi
               if ($jumlah_karakter == 6) {
               $color = "class='bg-danger text-white';";
-              }elseif ($jumlah_karakter == 8){
+              }
+              // diterima
+              elseif ($jumlah_karakter == 8){
               $color = "class='bg-success text-white';";
-              }elseif ($jumlah_karakter > 8){
+              }
+              // menunggu validasi
+              elseif ($jumlah_karakter == 17){
               $color = "class='bg-info text-white';";
+              }
+              // menunggu validasi revisi
+              elseif ($jumlah_karakter ){
+              $color = "class='bg-primary text-white';";
               }
               ?>
             <td <?= $color ?> ><?php echo $validasi; ?></td>
@@ -83,12 +80,8 @@
               <!-- tombol validasi muncul jika login level admin -->
               <?php 
                 if ($_SESSION['level']=="admin") {
-                 echo ''?> <a href="#" class="btn btn-sm btn-success validasi" data-toggle="modal" data-target="#rpjmdesModal" 
+                 echo ''?> <a href="#" class="btn btn-sm btn-success validasi" data-toggle="modal" data-target="#rpjmdesModal"
                       data-idrpjmdes="<?php echo $data["id_rpjmdes"];?>"
-                      data-rpjmdes="<?php echo $data["rpjmdes"];?>"
-                      data-perdes="<?php echo $data["perdes"];?>"
-                      data-iduser="<?php echo $data["id_user"];?>"
-                      data-tahun="<?php echo $data["tahun"];?>"
                       data-validasi="<?php echo $data["validasi"];?>"
                       data-catatan="<?php echo $data["catatan"];?>"
                       ><i class="fas fa-check"></i> validasi</a>
@@ -102,10 +95,6 @@
               data-id_rpjmdes="<?php echo $data['id_rpjmdes'];?>"
               data-rpjmdes="<?php echo $data['rpjmdes'];?>"
               data-perdes="<?php echo $data['perdes'];?>"
-              data-iduser="<?php echo $data['id_user'];?>"
-              data-tahun="<?php echo $data['tahun'];?>"
-              data-validasi="<?php echo $data['validasi'];?>"
-              data-catatan="<?php echo $data['catatan'];?>"
               ><i class="fas fa-edit"></i> edit</a>
 
               <a href="page/perencanaan/rpjmdes/hapus.php?id_rpjmdes=<?php echo $data['id_rpjmdes'];?>" onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
@@ -156,7 +145,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-sm btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-sm btn-primary" name="submit">Save changes</button>
       </div>
       </form>
     </div>
@@ -210,17 +199,19 @@ uploadField.onchange = function() {
       <div class="modal-body">
         <form action="page/perencanaan/rpjmdes/edit.php" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="id_rpjmdes" id="id_rpjmdes">
+          <input type="hidden" name="validasi" value="Menunggu Revisi Divalidasi">
+          <input type="hidden" name="catatan">
           <div class="form-group">
           <label for="rpjmdes">File RPJMDes</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="rpjmdes" id="rpjmdes" required="">
+              <input type="file" class="custom-file-input" name="rpjmdes" id="rpjm" onchange="return validasiFile()"/>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
           <div class="form-group">
           <label for="perdes">Perdes RPJMDes</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="perdes" id="perdes" required="">
+              <input type="file" class="custom-file-input" name="perdes" id="perd" onchange="return validasiFile()"/>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
@@ -248,13 +239,47 @@ uploadField.onchange = function() {
     var validasi = $(this).attr('data-validasi')
     var catatan = $(this).attr('data-catatan')
     $('#id_rpjmdes').val(id_rpjmdes)
-    $('#rpjmdes').val(rpjmdes)
-    $('#perdes').val(perdes)
+    $('#rpjm').val(rpjmdes)
+    $('#perd').val(perdes)
     $('#iduser').val(id_user)
     $('#tahun').val(tahun)
     $('#validasi').val(validasi)
     $('#catatan').val(catatan)
   })
+</script>
+
+<script type="text/javascript">
+var uploadField = document.getElementById("rpjm");
+uploadField.onchange = function() {
+    if(this.files[0].size > 5000000){ // ini untuk ukuran 800KB, 1000000 untuk 1 MB.
+       alert("Maaf. File Terlalu Besar ! Maksimal Upload 5 MB");
+       this.value = "";
+    };
+        var inputFile = document.getElementById('rpjm');
+        var pathFile = inputFile.value;
+        var ekstensiOk = /(\.pdf|\.xlsx|\.xls|\.doc|\.docx)$/i;
+        if(!ekstensiOk.exec(pathFile)){
+            alert('Silahkan upload file yang memiliki ekstensi .pdf.xlxs.docx');
+            inputFile.value = '';
+            return false;
+        }
+    };
+
+  var uploadField = document.getElementById("perd");
+  uploadField.onchange = function() {
+    if(this.files[0].size > 5000000){ // ini untuk ukuran 800KB, 1000000 untuk 1 MB.
+       alert("Maaf. File Terlalu Besar ! Maksimal Upload 5 MB");
+       this.value = "";
+    };
+        var inputFile = document.getElementById('perd');
+        var pathFile = inputFile.value;
+        var ekstensiOk = /(\.pdf|\.xlsx|\.xls|\.doc|\.docx)$/i;
+        if(!ekstensiOk.exec(pathFile)){
+            alert('Silahkan upload file yang memiliki ekstensi .pdf.xlxs.docx');
+            inputFile.value = '';
+            return false;
+        }
+    };
 </script>
 
 <!-- Modal validasi rpjmdes -->
@@ -304,17 +329,9 @@ uploadField.onchange = function() {
   $('.validasi').click(function(){
     $('#rpjmdesModal').modal();
     var id_rpjmdes = $(this).attr('data-idrpjmdes')
-    var rpjmdes = $(this).attr('data-rpjmdes')
-    var perdes = $(this).attr('data-perdes')
-    var id_user = $(this).attr('data-iduser')
-    var tahun = $(this).attr('data-tahun')
     var validasi = $(this).attr('data-validasi')
     var catatan = $(this).attr('data-catatan')
     $('#idrpjmdes').val(id_rpjmdes)
-    $('#rpjmdes').val(rpjmdes)
-    $('#perdes').val(perdes)
-    $('#iduser').val(id_user)
-    $('#tahun').val(tahun)
     $('#validasi').val(validasi)
     $('#catatan').val(catatan)
   })
