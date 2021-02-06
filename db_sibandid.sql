@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 21 Jan 2021 pada 02.34
--- Versi Server: 10.1.16-MariaDB
--- PHP Version: 7.0.9
+-- Waktu pembuatan: 06 Feb 2021 pada 13.28
+-- Versi server: 10.1.31-MariaDB
+-- Versi PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -403,277 +405,310 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data untuk tabel `tb_user`
+--
+
+INSERT INTO `tb_user` (`id_user`, `username`, `password`, `nama_user`, `level`) VALUES
+(1, 'admin', '$2y$10$JGgb2FSaT22Dt99kuI691..pr7WaAl375lac3nAJSOhSK1BDBYi6q', 'Admin', 'admin'),
+(2, 'user', '$2y$10$3G9/XDZqKJcOI0o9WDhMP.3wGUJYD3vndfgVI5A8mCNWeCaHehiTC', 'Mranggen', 'user');
+
+--
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `tb_apbdes`
+-- Indeks untuk tabel `tb_apbdes`
 --
 ALTER TABLE `tb_apbdes`
   ADD PRIMARY KEY (`id_apbdes`);
 
 --
--- Indexes for table `tb_apbdes_perub`
+-- Indeks untuk tabel `tb_apbdes_perub`
 --
 ALTER TABLE `tb_apbdes_perub`
   ADD PRIMARY KEY (`id_apbdes_perub`);
 
 --
--- Indexes for table `tb_ba_kas`
+-- Indeks untuk tabel `tb_ba_kas`
 --
 ALTER TABLE `tb_ba_kas`
   ADD PRIMARY KEY (`id_ba_kas`);
 
 --
--- Indexes for table `tb_bulanan`
+-- Indeks untuk tabel `tb_bulanan`
 --
 ALTER TABLE `tb_bulanan`
   ADD PRIMARY KEY (`id_bulanan`);
 
 --
--- Indexes for table `tb_habis_pakai`
+-- Indeks untuk tabel `tb_habis_pakai`
 --
 ALTER TABLE `tb_habis_pakai`
   ADD PRIMARY KEY (`id_habis_pakai`);
 
 --
--- Indexes for table `tb_ippd`
+-- Indeks untuk tabel `tb_ippd`
 --
 ALTER TABLE `tb_ippd`
   ADD PRIMARY KEY (`id_ippd`);
 
 --
--- Indexes for table `tb_lpkj`
+-- Indeks untuk tabel `tb_lpkj`
 --
 ALTER TABLE `tb_lpkj`
   ADD PRIMARY KEY (`id_lpkj`);
 
 --
--- Indexes for table `tb_lppd`
+-- Indeks untuk tabel `tb_lppd`
 --
 ALTER TABLE `tb_lppd`
   ADD PRIMARY KEY (`id_lppd`);
 
 --
--- Indexes for table `tb_omspan`
+-- Indeks untuk tabel `tb_omspan`
 --
 ALTER TABLE `tb_omspan`
   ADD PRIMARY KEY (`id_omspan`);
 
 --
--- Indexes for table `tb_realisasi_add`
+-- Indeks untuk tabel `tb_realisasi_add`
 --
 ALTER TABLE `tb_realisasi_add`
   ADD PRIMARY KEY (`id_realisasi_add`);
 
 --
--- Indexes for table `tb_realisasi_apbdes`
+-- Indeks untuk tabel `tb_realisasi_apbdes`
 --
 ALTER TABLE `tb_realisasi_apbdes`
   ADD PRIMARY KEY (`id_realisasi_apbdes`);
 
 --
--- Indexes for table `tb_realisasi_apbdes_dana`
+-- Indeks untuk tabel `tb_realisasi_apbdes_dana`
 --
 ALTER TABLE `tb_realisasi_apbdes_dana`
   ADD PRIMARY KEY (`id_realisasi_apbdes_dana`);
 
 --
--- Indexes for table `tb_realisasi_dd`
+-- Indeks untuk tabel `tb_realisasi_dd`
 --
 ALTER TABLE `tb_realisasi_dd`
   ADD PRIMARY KEY (`id_realisasi_dd`);
 
 --
--- Indexes for table `tb_realisasi_pad`
+-- Indeks untuk tabel `tb_realisasi_pad`
 --
 ALTER TABLE `tb_realisasi_pad`
   ADD PRIMARY KEY (`id_realisasi_pad`);
 
 --
--- Indexes for table `tb_rekap_realisasi_apbdes`
+-- Indeks untuk tabel `tb_rekap_realisasi_apbdes`
 --
 ALTER TABLE `tb_rekap_realisasi_apbdes`
   ADD PRIMARY KEY (`id_rekap_realisasi_apbdes`);
 
 --
--- Indexes for table `tb_retribusi`
+-- Indeks untuk tabel `tb_retribusi`
 --
 ALTER TABLE `tb_retribusi`
   ADD PRIMARY KEY (`id_retribusi`);
 
 --
--- Indexes for table `tb_rkpdes`
+-- Indeks untuk tabel `tb_rkpdes`
 --
 ALTER TABLE `tb_rkpdes`
   ADD PRIMARY KEY (`id_rkpdes`);
 
 --
--- Indexes for table `tb_rpd`
+-- Indeks untuk tabel `tb_rpd`
 --
 ALTER TABLE `tb_rpd`
   ADD PRIMARY KEY (`id_rpd`);
 
 --
--- Indexes for table `tb_rpjmdes`
+-- Indeks untuk tabel `tb_rpjmdes`
 --
 ALTER TABLE `tb_rpjmdes`
   ADD PRIMARY KEY (`id_rpjmdes`);
 
 --
--- Indexes for table `tb_smt_1`
+-- Indeks untuk tabel `tb_smt_1`
 --
 ALTER TABLE `tb_smt_1`
   ADD PRIMARY KEY (`id_smt_1`);
 
 --
--- Indexes for table `tb_smt_2`
+-- Indeks untuk tabel `tb_smt_2`
 --
 ALTER TABLE `tb_smt_2`
   ADD PRIMARY KEY (`id_smt_2`);
 
 --
--- Indexes for table `tb_tanggung_jawab`
+-- Indeks untuk tabel `tb_tanggung_jawab`
 --
 ALTER TABLE `tb_tanggung_jawab`
   ADD PRIMARY KEY (`id_tanggung_jawab`);
 
 --
--- Indexes for table `tb_tutup_kas`
+-- Indeks untuk tabel `tb_tutup_kas`
 --
 ALTER TABLE `tb_tutup_kas`
   ADD PRIMARY KEY (`id_tutup_kas`);
 
 --
--- Indexes for table `tb_user`
+-- Indeks untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tb_apbdes`
+-- AUTO_INCREMENT untuk tabel `tb_apbdes`
 --
 ALTER TABLE `tb_apbdes`
   MODIFY `id_apbdes` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_apbdes_perub`
+-- AUTO_INCREMENT untuk tabel `tb_apbdes_perub`
 --
 ALTER TABLE `tb_apbdes_perub`
   MODIFY `id_apbdes_perub` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_ba_kas`
+-- AUTO_INCREMENT untuk tabel `tb_ba_kas`
 --
 ALTER TABLE `tb_ba_kas`
   MODIFY `id_ba_kas` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_bulanan`
+-- AUTO_INCREMENT untuk tabel `tb_bulanan`
 --
 ALTER TABLE `tb_bulanan`
   MODIFY `id_bulanan` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_habis_pakai`
+-- AUTO_INCREMENT untuk tabel `tb_habis_pakai`
 --
 ALTER TABLE `tb_habis_pakai`
   MODIFY `id_habis_pakai` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_ippd`
+-- AUTO_INCREMENT untuk tabel `tb_ippd`
 --
 ALTER TABLE `tb_ippd`
   MODIFY `id_ippd` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_lpkj`
+-- AUTO_INCREMENT untuk tabel `tb_lpkj`
 --
 ALTER TABLE `tb_lpkj`
   MODIFY `id_lpkj` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_lppd`
+-- AUTO_INCREMENT untuk tabel `tb_lppd`
 --
 ALTER TABLE `tb_lppd`
   MODIFY `id_lppd` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_omspan`
+-- AUTO_INCREMENT untuk tabel `tb_omspan`
 --
 ALTER TABLE `tb_omspan`
   MODIFY `id_omspan` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_realisasi_add`
+-- AUTO_INCREMENT untuk tabel `tb_realisasi_add`
 --
 ALTER TABLE `tb_realisasi_add`
   MODIFY `id_realisasi_add` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_realisasi_apbdes`
+-- AUTO_INCREMENT untuk tabel `tb_realisasi_apbdes`
 --
 ALTER TABLE `tb_realisasi_apbdes`
   MODIFY `id_realisasi_apbdes` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_realisasi_apbdes_dana`
+-- AUTO_INCREMENT untuk tabel `tb_realisasi_apbdes_dana`
 --
 ALTER TABLE `tb_realisasi_apbdes_dana`
   MODIFY `id_realisasi_apbdes_dana` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_realisasi_dd`
+-- AUTO_INCREMENT untuk tabel `tb_realisasi_dd`
 --
 ALTER TABLE `tb_realisasi_dd`
   MODIFY `id_realisasi_dd` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_realisasi_pad`
+-- AUTO_INCREMENT untuk tabel `tb_realisasi_pad`
 --
 ALTER TABLE `tb_realisasi_pad`
   MODIFY `id_realisasi_pad` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_rekap_realisasi_apbdes`
+-- AUTO_INCREMENT untuk tabel `tb_rekap_realisasi_apbdes`
 --
 ALTER TABLE `tb_rekap_realisasi_apbdes`
   MODIFY `id_rekap_realisasi_apbdes` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_retribusi`
+-- AUTO_INCREMENT untuk tabel `tb_retribusi`
 --
 ALTER TABLE `tb_retribusi`
   MODIFY `id_retribusi` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_rkpdes`
+-- AUTO_INCREMENT untuk tabel `tb_rkpdes`
 --
 ALTER TABLE `tb_rkpdes`
   MODIFY `id_rkpdes` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_rpd`
+-- AUTO_INCREMENT untuk tabel `tb_rpd`
 --
 ALTER TABLE `tb_rpd`
   MODIFY `id_rpd` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_rpjmdes`
+-- AUTO_INCREMENT untuk tabel `tb_rpjmdes`
 --
 ALTER TABLE `tb_rpjmdes`
   MODIFY `id_rpjmdes` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_smt_1`
+-- AUTO_INCREMENT untuk tabel `tb_smt_1`
 --
 ALTER TABLE `tb_smt_1`
   MODIFY `id_smt_1` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_smt_2`
+-- AUTO_INCREMENT untuk tabel `tb_smt_2`
 --
 ALTER TABLE `tb_smt_2`
   MODIFY `id_smt_2` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_tanggung_jawab`
+-- AUTO_INCREMENT untuk tabel `tb_tanggung_jawab`
 --
 ALTER TABLE `tb_tanggung_jawab`
   MODIFY `id_tanggung_jawab` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_tutup_kas`
+-- AUTO_INCREMENT untuk tabel `tb_tutup_kas`
 --
 ALTER TABLE `tb_tutup_kas`
   MODIFY `id_tutup_kas` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `tb_user`
+-- AUTO_INCREMENT untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
