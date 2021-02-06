@@ -1,42 +1,34 @@
 <?php 
-// mengaktifkan session pada php
 session_start();
 
 // menghubungkan php dengan koneksi database
 include 'asset/inc/config.php';
 
+if (isset($_POST['login'])) {
 // menangkap data yang dikirim dari form login
 $username = $_POST['username'];
 $password = $_POST['password'];
-$tahun		= $_POST['tahun'];
+$tahun	  = $_POST['tahun'];
 
-// menyeleksi data user dengan username dan password yang sesuai
-$sql = mysqli_query($koneksi,"select * from tb_user where username='$username' and password='$password'");
-
-
-// cek apakah username dan password di temukan pada database
-if(mysqli_num_rows($sql)==1){
-			$qry = mysqli_fetch_array($sql);
-			$_SESSION['id_user']	= $qry['id_user'];
-			$_SESSION['username']	= $qry['username'];
-			$_SESSION['nama_user']	= $qry['nama_user'];
-			$_SESSION['level']	= $qry['level'];
-			$_SESSION['tahun']	= $tahun;
-			
-			if($qry['level']=="admin"){
-				header("location:index.php");
-			}
-			if($qry['level']=="user"){
-				header("location:index.php");
-			}
-		}
-else{
-			?>
-			<script language="JavaScript">
-				alert('Login Failed. Username & password tidak sesuai ...');
-				document.location='./';
-			</script>
-			<?php
-		}
+$query = "SELECT *from tb_user WHERE username='$username'";
+  $result = mysqli_query($koneksi, $query);
+  while($data = mysqli_fetch_assoc($result)){
+	$_SESSION['id_user']	= $data['id_user'];
+	$_SESSION['username']	= $data['username'];
+	$_SESSION['nama_user']	= $data['nama_user'];
+	$_SESSION['level']		= $data['level'];
+	$_SESSION['tahun']		= $tahun;
+    $hasil = $data["password"];
+    $verf= password_verify($password, $hasil);
+    if ($verf == true) {
+		header("location:index.php");
+	}else{
+      echo "<script>
+				alert('Login Failed. Username & password tidak sesuai...!');
+				document.location='login.php';
+			</script>";
+    }
+  }
+}
 
 ?>
