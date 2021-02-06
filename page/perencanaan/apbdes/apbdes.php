@@ -19,46 +19,96 @@
           </tr>
         </thead>
         <tbody>
+
+          <?php  
+          include "asset/inc/config.php";
+          if ($_SESSION['level']=="admin") {
+             $query = "SELECT * FROM tb_apbdes
+                      INNER JOIN tb_user ON tb_apbdes.id_user = tb_user.id_user";
+            $result = mysqli_query($koneksi, $query);
+          }
+          if ($_SESSION['level']=="user") {
+            $id_user = $_SESSION['id_user'];
+            $query= "SELECT * FROM tb_apbdes
+                      INNER JOIN tb_user ON tb_apbdes.id_user = tb_user.id_user AND tb_apbdes.id_user=$id_user";
+            $result = mysqli_query($koneksi, $query);
+          }  
+            //mengecek apakah ada error ketika menjalankan query
+            if(!$result){
+              die ("Query Error: ".mysqli_errno($koneksi).
+                 " - ".mysqli_error($koneksi));
+            }
+            //buat perulangan untuk element tabel dari data apbdes
+            $no = 1;
+            while($data = mysqli_fetch_assoc($result))
+            {
+            ?>
           <tr>
-            <td class="text-center">1</td>
-            <td>Mranggen</td>
+            <td class="text-center"><?php echo "$no"; ?></td>
+            <td><?php echo $data['nama_user']; ?></td>
             <!-- Bisa di download untuk di koreksi, muncul link jika user sudah login jika belum login jangan tampilkan linknya-->
-            <td><a href="#">APBDes Mranggen</a></td>
-            <td><a href="#">Perdes APBDes Mranggen</a></td>
+            <td>
+              <a href="page/perencanaan/apbdes/file/apbdes/<?php echo $data['apbdes']; ?>">
+              <i class="fas fa-download" id="downloadapbdes">&nbsp;&nbsp;</i></a><?php echo $data['apbdes']; ?>
+            </td>
+            <td><a href="page/perencanaan/apbdes/file/perdes/<?php echo $data['perdes']; ?>"><i class="fas fa-download" id="downloadperdes">&nbsp;&nbsp;</i></a><?php echo $data['perdes']; ?></td>
 
             <!-- Jika catatan "revisi" kolom berwarna merah kalau "diterima" warna hijau -->
-            <td class="bg-danger text-white">Revisi</td>
-            <td>Anggaran Tidak sesuai </td>
+            <?php 
+              $validasi = $data['validasi'];
+              $jumlah_karakter    =strlen($validasi);
+              // revisi
+              if ($jumlah_karakter == 6) {
+              $color = "class='bg-danger text-white';";
+              }
+              // diterima
+              elseif ($jumlah_karakter == 8){
+              $color = "class='bg-success text-white';";
+              }
+              // menunggu validasi
+              elseif ($jumlah_karakter == 17){
+              $color = "class='bg-info text-white';";
+              }
+              // menunggu validasi revisi
+              elseif ($jumlah_karakter ){
+              $color = "class='bg-primary text-white';";
+              }
+              ?>
+            <td <?= $color ?> ><?php echo $validasi; ?></td>
+            <td><?php echo $data['catatan']; ?></td>
             <td>
               <!-- tombol validasi muncul jika login level admin -->
-              <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#apbdesModal"><i class="fas fa-check"></i> validasi</a>
-              <a href="#" class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit_apbdesModal"><i class="fas fa-edit"></i> edit</a>
-              <a href="#" onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
-            </td>
-          </tr>
-          <tr>
-            <td class="text-center">2</td>
-            <td>Banyumeneng</td>
-            <!-- Bisa di download untuk di koreksi, muncul link jika user sudah login jika belum login jangan tampilkan linknya-->
-            <td><a href="#">APBDes Banyumeneng</a></td>
-            <td><a href="#">Perdes APBDes Banyumeneng</a></td>
+              <?php 
+                if ($_SESSION['level']=="admin") {
+                 echo ''?> <a href="#" class="btn btn-sm btn-success validasi" data-toggle="modal" data-target="#apbdesModal"
+                      data-idapbdes="<?php echo $data["id_apbdes"];?>"
+                      data-validasi="<?php echo $data["validasi"];?>"
+                      data-catatan="<?php echo $data["catatan"];?>"
+                      ><i class="fas fa-check"></i> validasi</a>
+                <?php  ;
+                }else{
+                 echo '';
+                }
+               ?>
 
-            <!-- Jika catatan "revisi" kolom berwarna merah kalau "diterima" warna hijau -->
-            <td class="bg-success text-white">Diterima</td>
-            <td>Anggaran Tidak sesuai </td>
-            <td>
-              <!-- tombol validasi muncul jika login level admin -->
-              <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#apbdesModal"><i class="fas fa-check"></i> validasi</a>
-              <a href="#" class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit_apbdesModal"><i class="fas fa-edit"></i> edit</a>
-              <a href="#" onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
+              <a href="#" class="btn btn-sm btn-info edit" data-toggle="modal" data-target="#edit_apbdesModal"
+              data-id_apbdes="<?php echo $data['id_apbdes'];?>"
+              data-apbdes="<?php echo $data['apbdes'];?>"
+              data-perdes="<?php echo $data['perdes'];?>"
+              ><i class="fas fa-edit"></i> edit</a>
+
+              <a href="page/perencanaan/apbdes/hapus.php?id_apbdes=<?php echo $data['id_apbdes'];?>" onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
             </td>
           </tr>
+          <?php
+          $no++;
+          }
+          ?>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-
 
 <!-- Modal add apbdes -->
 <div class="modal fade" id="add_apbdesModal" tabindex="-1" aria-labelledby="apbdesModalLabel" aria-hidden="true">
@@ -71,32 +121,70 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
+        <form method="POST" action="page/perencanaan/apbdes/tambah.php" enctype="multipart/form-data" >
+          <input type="hidden" name="valid" id="valid" value="Menunggu Validasi">
+          <input type="hidden" name="id_user" id="iduser" value="<?= $_SESSION['id_user']; ?>">
+          <input type="hidden" name="tahun" id="tahun" value="<?= date("Y-m-d"); ?>">
           <div class="form-group">
             <label for="">File APBDes</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
+              <input type="file" class="custom-file-input" id="apbdes" name="apbdes" required="" onchange="return validasiFile()"/>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
           <div class="form-group">
             <label for="">Perdes APBDes</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
+              <input type="file" class="custom-file-input" id="perdes" name="perdes" required="" onchange="return validasiFile()"/>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
           <span class="text-danger"><small>* File yang diperbolehkan Excel, Word & pdf </small></span><br>
           <span class="text-danger"><small>* Ukuran file maksimal 5mb</small></span>
-        </form>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-sm btn-primary" name="submit">Save changes</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+var uploadField = document.getElementById("apbdes");
+uploadField.onchange = function() {
+    if(this.files[0].size > 5000000){ // ini untuk ukuran 800KB, 1000000 untuk 1 MB.
+       alert("Maaf. File Terlalu Besar ! Maksimal Upload 5 MB");
+       this.value = "";
+    };
+        var inputFile = document.getElementById('apbdes');
+        var pathFile = inputFile.value;
+        var ekstensiOk = /(\.pdf|\.xlsx|\.xls|\.doc|\.docx)$/i;
+        if(!ekstensiOk.exec(pathFile)){
+            alert('Silahkan upload file yang memiliki ekstensi .pdf.xlxs.docx');
+            inputFile.value = '';
+            return false;
+        }
+    };
+
+  var uploadField = document.getElementById("perdes");
+  uploadField.onchange = function() {
+    if(this.files[0].size > 5000000){ // ini untuk ukuran 800KB, 1000000 untuk 1 MB.
+       alert("Maaf. File Terlalu Besar ! Maksimal Upload 5 MB");
+       this.value = "";
+    };
+        var inputFile = document.getElementById('perdes');
+        var pathFile = inputFile.value;
+        var ekstensiOk = /(\.pdf|\.xlsx|\.xls|\.doc|\.docx)$/i;
+        if(!ekstensiOk.exec(pathFile)){
+            alert('Silahkan upload file yang memiliki ekstensi .pdf.xlxs.docx');
+            inputFile.value = '';
+            return false;
+        }
+    };
+</script>
 
 <!-- Modal edit apbdes -->
 <div class="modal fade" id="edit_apbdesModal" tabindex="-1" aria-labelledby="apbdesModalLabel" aria-hidden="true">
@@ -107,34 +195,92 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div> 
       <div class="modal-body">
-        <form action="" method="post">
+        <form action="page/perencanaan/apbdes/edit.php" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="id_apbdes" id="id_apbdes">
+          <input type="hidden" name="validasi" value="Menunggu Revisi Divalidasi">
+          <input type="hidden" name="catatan">
           <div class="form-group">
-          <label for="">File APBDes</label>
+          <label for="apbdes">File APBDes</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
+              <input type="file" class="custom-file-input" name="apbdes" id="rpjm" onchange="return validasiFile()"/>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
           <div class="form-group">
-          <label for="">Perdes APBDes</label>
+          <label for="perdes">Perdes APBDes</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
+              <input type="file" class="custom-file-input" name="perdes" id="perd" onchange="return validasiFile()"/>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
           <span class="text-danger"><small>* File yang diperbolehkan Excel, Word & pdf </small></span><br>
           <span class="text-danger"><small>* Ukuran file maksimal 5mb</small></span>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-sm btn-primary" name="update">Save changes</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
+
+<script src="asset/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+  $('.edit').click(function(){
+    $('#edit_apbdesModal').modal();
+    var id_apbdes = $(this).attr('data-id_apbdes')
+    var apbdes = $(this).attr('data-apbdes')
+    var perdes = $(this).attr('data-perdes')
+    var id_user = $(this).attr('data-iduser')
+    var tahun = $(this).attr('data-tahun')
+    var validasi = $(this).attr('data-validasi')
+    var catatan = $(this).attr('data-catatan')
+    $('#id_apbdes').val(id_apbdes)
+    $('#rpjm').val(apbdes)
+    $('#perd').val(perdes)
+    $('#iduser').val(id_user)
+    $('#tahun').val(tahun)
+    $('#validasi').val(validasi)
+    $('#catatan').val(catatan)
+  })
+</script>
+
+<script type="text/javascript">
+var uploadField = document.getElementById("rpjm");
+uploadField.onchange = function() {
+    if(this.files[0].size > 5000000){ // ini untuk ukuran 800KB, 1000000 untuk 1 MB.
+       alert("Maaf. File Terlalu Besar ! Maksimal Upload 5 MB");
+       this.value = "";
+    };
+        var inputFile = document.getElementById('rpjm');
+        var pathFile = inputFile.value;
+        var ekstensiOk = /(\.pdf|\.xlsx|\.xls|\.doc|\.docx)$/i;
+        if(!ekstensiOk.exec(pathFile)){
+            alert('Silahkan upload file yang memiliki ekstensi .pdf.xlxs.docx');
+            inputFile.value = '';
+            return false;
+        }
+    };
+
+  var uploadField = document.getElementById("perd");
+  uploadField.onchange = function() {
+    if(this.files[0].size > 5000000){ // ini untuk ukuran 800KB, 1000000 untuk 1 MB.
+       alert("Maaf. File Terlalu Besar ! Maksimal Upload 5 MB");
+       this.value = "";
+    };
+        var inputFile = document.getElementById('perd');
+        var pathFile = inputFile.value;
+        var ekstensiOk = /(\.pdf|\.xlsx|\.xls|\.doc|\.docx)$/i;
+        if(!ekstensiOk.exec(pathFile)){
+            alert('Silahkan upload file yang memiliki ekstensi .pdf.xlxs.docx');
+            inputFile.value = '';
+            return false;
+        }
+    };
+</script>
 
 <!-- Modal validasi apbdes -->
 <div class="modal fade" id="apbdesModal" tabindex="-1" aria-labelledby="apbdesModalLabel" aria-hidden="true">
@@ -145,27 +291,48 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div>  
       <div class="modal-body">
-        <form action="" method="post">
+        <form method="POST" action="page/perencanaan/apbdes/validasi.php">
+          <input type="hidden" name="id_apbdes" id="idapbdes">
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Validasi</label>
-            <select class="form-control" id="exampleFormControlSelect1">
+            <label for="validasi">Validasi</label>
+            <select class="form-control" name="debug" id="validasi" tabindex="-1">
               <option>-- Pilih --</option>
               <option value="Revisi">Revisi</option>
               <option value="Diterima">Diterima</option>
             </select>
+              <script>
+                $(function() {
+                  $("#validasi").on("change", function() {
+                    $("#debug").text($("#validasi").val());
+                  }).trigger("change");
+                });
+              </script>
           </div>
           <div class="form-group">
             <label for="catatan">Catatan</label>
-            <textarea class="form-control" id="catatan" rows="3"></textarea>
+            <textarea class="form-control" name="catatan" id="catatan" rows="3"></textarea>
           </div>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-sm btn-primary" name="validasi">Save changes</button>
       </div>
+        </form>
     </div>
   </div>
 </div>
+
+<script src="asset/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+  $('.validasi').click(function(){
+    $('#apbdesModal').modal();
+    var id_apbdes = $(this).attr('data-idapbdes')
+    var validasi = $(this).attr('data-validasi')
+    var catatan = $(this).attr('data-catatan')
+    $('#idapbdes').val(id_apbdes)
+    $('#validasi').val(validasi)
+    $('#catatan').val(catatan)
+  })
+</script>
