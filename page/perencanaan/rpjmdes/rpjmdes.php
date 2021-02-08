@@ -29,8 +29,9 @@
           }
           if ($_SESSION['level']=="user") {
             $id_user = $_SESSION['id_user'];
+            $tahun = $_SESSION['tahun'];
             $query= "SELECT * FROM tb_rpjmdes
-                      INNER JOIN tb_user ON tb_rpjmdes.id_user = tb_user.id_user AND tb_rpjmdes.id_user=$id_user ORDER BY id_rpjmdes DESC";
+                      INNER JOIN tb_user ON tb_rpjmdes.id_user = tb_user.id_user AND tb_rpjmdes.id_user=$id_user AND tahun='$tahun' ORDER BY id_rpjmdes DESC";
             $result = mysqli_query($koneksi, $query);
           }  
             //mengecek apakah ada error ketika menjalankan query
@@ -124,7 +125,7 @@
         <form method="POST" action="page/perencanaan/rpjmdes/tambah.php" enctype="multipart/form-data" >
           <input type="hidden" name="valid" id="valid" value="Menunggu Validasi">
           <input type="hidden" name="id_user" id="iduser" value="<?= $_SESSION['id_user']; ?>">
-          <input type="hidden" name="tahun" id="tahun" value="<?= date("Y-m-d"); ?>">
+          <input type="hidden" name="tahun" id="tahun" value="<?= date("Y"); ?>">
           <div class="form-group">
             <label for="">File RPJMDes</label>
             <div class="custom-file">
