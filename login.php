@@ -13,7 +13,7 @@ session_start();
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Login e-Agenda</title>
+  <title>Login si-bandid</title>
 
   <!-- Custom fonts for this template-->
   <link href="asset/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -49,10 +49,10 @@ session_start();
                   </div>
                   <form action="cek_login.php" class="user" method="post">
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" name="username" placeholder="Masukkan Username" autofocus>
+                      <input type="text" class="form-control form-control-user" name="username" placeholder="Masukkan Username" required="" autofocus>
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" name="password" placeholder="Masukkan Password">
+                      <input type="password" class="form-control form-control-user" name="password" placeholder="Masukkan Password" required="">
                     </div>
                     <div class="form-group">
                       <select name="tahun" id="" class="form-control">
