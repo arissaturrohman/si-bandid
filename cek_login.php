@@ -9,15 +9,14 @@ if (isset($_POST['login'])) {
 $username = $_POST['username'];
 $password = $_POST['password'];
 $tahun	  = $_POST['tahun'];
-
-$query = "SELECT *from tb_user WHERE username='$username'";
+$_SESSION['tahun'] = $_POST['tahun'];
+$query = "SELECT * from tb_user WHERE username='$username'";
   $result = mysqli_query($koneksi, $query);
   while($data = mysqli_fetch_assoc($result)){
 	$_SESSION['id_user']	= $data['id_user'];
 	$_SESSION['username']	= $data['username'];
 	$_SESSION['nama_user']	= $data['nama_user'];
 	$_SESSION['level']		= $data['level'];
-	$_SESSION['tahun']		= $tahun;
     $hasil = $data["password"];
     $verf= password_verify($password, $hasil);
     if ($verf == true) {
