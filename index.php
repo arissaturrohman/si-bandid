@@ -156,7 +156,14 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
             <a class="collapse-item" href="?page=profile">Profile</a>
             <a class="collapse-item" href="?page=ganti_pass">Ganti Password</a>
             <!-- Tombol users tampil jika login admin -->
-            <a class="collapse-item" href="?page=user">Users</a>
+            <?php 
+                if ($_SESSION['level']=="admin") {
+                 echo ''?><a class="collapse-item" href="?page=user">Users</a>
+            <?php  ;
+            }else{
+             echo '';
+            }
+           ?>
           </div>
         </div>
       </li>
