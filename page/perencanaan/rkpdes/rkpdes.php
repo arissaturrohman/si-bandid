@@ -22,15 +22,16 @@
 
           <?php  
           include "asset/inc/config.php";
+          $tahun = $_SESSION['tahun'];
           if ($_SESSION['level']=="admin") {
              $query = "SELECT * FROM tb_rkpdes
-                      INNER JOIN tb_user ON tb_rkpdes.id_user = tb_user.id_user";
+                      INNER JOIN tb_user ON tb_rkpdes.id_user = tb_user.id_user AND tahun='$tahun' ORDER BY id_rkpdes DESC";
             $result = mysqli_query($koneksi, $query);
           }
           if ($_SESSION['level']=="user") {
             $id_user = $_SESSION['id_user'];
             $query= "SELECT * FROM tb_rkpdes
-                      INNER JOIN tb_user ON tb_rkpdes.id_user = tb_user.id_user AND tb_rkpdes.id_user=$id_user";
+                      INNER JOIN tb_user ON tb_rkpdes.id_user = tb_user.id_user AND tb_rkpdes.id_user=$id_user AND tahun='$tahun' ORDER BY id_rkpdes DESC";
             $result = mysqli_query($koneksi, $query);
           }  
             //mengecek apakah ada error ketika menjalankan query
@@ -124,7 +125,7 @@
         <form method="POST" action="page/perencanaan/rkpdes/tambah.php" enctype="multipart/form-data" >
           <input type="hidden" name="valid" id="valid" value="Menunggu Validasi">
           <input type="hidden" name="id_user" id="iduser" value="<?= $_SESSION['id_user']; ?>">
-          <input type="hidden" name="tahun" id="tahun" value="<?= date("Y-m-d"); ?>">
+          <input type="hidden" name="tahun" id="tahun" value="<?= date("Y"); ?>">
           <div class="form-group">
             <label for="">File RKPDes</label>
             <div class="custom-file">
