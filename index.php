@@ -203,8 +203,8 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                 <?php
-                 $nama = $_SESSION['nama_user'] == "Administrator";
-                 if ($nama == "Administrator") {
+                 $nama = $_SESSION['nama_user'] == "Admin";
+                 if ($nama == "Admin") {
                    echo $_SESSION['nama_user'];
                  }  else {
                    echo "Desa ".$_SESSION['nama_user'];
