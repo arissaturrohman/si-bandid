@@ -21,15 +21,16 @@
         <tbody>
           <?php  
           include "asset/inc/config.php";
+          $tahun = $_SESSION['tahun'];
           if ($_SESSION['level']=="admin") {
              $query = "SELECT * FROM tb_realisasi_dd
-                      INNER JOIN tb_user ON tb_realisasi_dd.id_user = tb_user.id_user ORDER BY id_realisasi_dd DESC";
+                      INNER JOIN tb_user ON tb_realisasi_dd.id_user = tb_user.id_user AND tahun='$tahun' ORDER BY id_realisasi_dd DESC";
             $result = mysqli_query($koneksi, $query);
           }
           if ($_SESSION['level']=="user") {
             $id_user = $_SESSION['id_user'];
             $query= "SELECT * FROM tb_realisasi_dd
-                      INNER JOIN tb_user ON tb_realisasi_dd.id_user = tb_user.id_user AND tb_realisasi_dd.id_user=$id_user ORDER BY id_realisasi_dd DESC";
+                      INNER JOIN tb_user ON tb_realisasi_dd.id_user = tb_user.id_user AND tb_realisasi_dd.id_user=$id_user AND tahun='$tahun' ORDER BY id_realisasi_dd DESC";
             $result = mysqli_query($koneksi, $query);
           }  
             //mengecek apakah ada error ketika menjalankan query
@@ -37,7 +38,7 @@
               die ("Query Error: ".mysqli_errno($koneksi).
                  " - ".mysqli_error($koneksi));
             }
-            //buat perulangan untuk element tabel dari data rpjmdes
+            //buat perulangan untuk element tabel dari data realisasi_dd
             $no = 1;
             while($data = mysqli_fetch_assoc($result))
             {
@@ -141,7 +142,7 @@
         <form method="POST" action="page/pelaksanaan/dd/tambah.php" enctype="multipart/form-data" >
           <input type="hidden" name="valid" id="valid" value="Menunggu Validasi">
           <input type="hidden" name="id_user" id="iduser" value="<?= $_SESSION['id_user']; ?>">
-          <input type="hidden" name="tahun" id="tahun" value="<?= date("Y-m-d"); ?>">
+          <input type="hidden" name="tahun" id="tahun" value="<?= date("Y"); ?>">
           <div class="form-group">
             <label for="">File Realisasi DD</label>
             <div class="custom-file">
