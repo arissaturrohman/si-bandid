@@ -22,14 +22,14 @@
 
           <?php  
           include "asset/inc/config.php";
+          $tahun = $_SESSION['tahun'];
           if ($_SESSION['level']=="admin") {
              $query = "SELECT * FROM tb_rpjmdes
-                      INNER JOIN tb_user ON tb_rpjmdes.id_user = tb_user.id_user ORDER BY id_rpjmdes DESC";
+                      INNER JOIN tb_user ON tb_rpjmdes.id_user = tb_user.id_user AND tahun='$tahun' ORDER BY id_rpjmdes DESC";
             $result = mysqli_query($koneksi, $query);
           }
           if ($_SESSION['level']=="user") {
             $id_user = $_SESSION['id_user'];
-            $tahun = $_SESSION['tahun'];
             $query= "SELECT * FROM tb_rpjmdes
                       INNER JOIN tb_user ON tb_rpjmdes.id_user = tb_user.id_user AND tb_rpjmdes.id_user=$id_user AND tahun='$tahun' ORDER BY id_rpjmdes DESC";
             $result = mysqli_query($koneksi, $query);

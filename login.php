@@ -55,10 +55,11 @@ session_start();
                       <input type="password" class="form-control form-control-user" name="password" placeholder="Masukkan Password" required="">
                     </div>
                     <div class="form-group">
+                      <!-- tahun diganti untuk tes tampilkan data sesuai tahun yang dipilih -->
                       <select name="tahun" id="" class="form-control">
                         <?php
                         $year = date('Y');
-                        for ($i = $year; $i >= 2021; $i--) {
+                        for ($i = $year; $i >= 2020; $i--) {
                         ?>
                           <option value="<?= $i; ?>"><?= $i; ?></option>
                         <?php
