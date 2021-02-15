@@ -12,6 +12,7 @@
             <th width="5%" class="text-center">Desa</th>
             <th class="text-center">APBDes Perubahan</th>
             <th class="text-center">Perdes</th>
+            <th class="text-center">Perkades</th>
             <th width="5%" class="text-center">Validasi</th>
             <th class="text-center">Catatan</th>
             <!-- Kolom action tampil jika user sudah login -->
@@ -140,6 +141,13 @@
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
+          <div class="form-group">
+            <label for="">Perkades APBDes Perubahan</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="perkades" name="perkades" required="" onchange="return validasiFile()"/>
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+          </div>
           <span class="text-danger"><small>* File yang diperbolehkan Excel, Word & pdf </small></span><br>
           <span class="text-danger"><small>* Ukuran file maksimal 5mb</small></span>
         
@@ -213,6 +221,13 @@ uploadField.onchange = function() {
           <label for="perdes">Perdes APBDes Perubahan</label>
             <div class="custom-file">
               <input type="file" class="custom-file-input" name="perdes" id="perd" onchange="return validasiFile()"/>
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+          </div>
+          <div class="form-group">
+          <label for="perkades">Perkades APBDes Perubahan</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" name="perkades" id="Perkades" onchange="return validasiFile()"/>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
