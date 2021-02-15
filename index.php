@@ -32,6 +32,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
   <!-- Custom styles for this template-->
   <link href="asset/css/sb-admin-2.min.css" rel="stylesheet">
   <link rel="stylesheet" href="asset/css/ekko-lightbox.css">
+  <link href="asset/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="asset/img/icon_bandit.png" type="image/x-icon">
 
   
@@ -104,8 +105,8 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
             <a class="collapse-item" href="?page=p_add">Realisasi ADD</a>
             <a class="collapse-item" href="?page=p_pad">Realisasi PAD</a>
             <a class="collapse-item" href="?page=p_apbdes">Realisasi APBDes</a>
-            <a class="collapse-item" href="#">Retribusi</a>
-            <a class="collapse-item" href="#">SK PKPKD / PPKD</a>
+            <a class="collapse-item" href="?page=retribusi">Retribusi</a>
+            <a class="collapse-item" href="?page=sk">SK PKPKD / PPKD</a>
           </div>
         </div>
       </li>
@@ -119,19 +120,20 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
         <div id="collapselaporan" class="collapse" aria-labelledby="headinglaporan" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Pelaporan:</h6>
-            <a class="collapse-item" href="#">Bulanan</a>
-            <a class="collapse-item" href="#">Semester 1</a>
-            <a class="collapse-item" href="#">Semester 2</a>
-            <a class="collapse-item" href="#">LPPD</a>
-            <a class="collapse-item" href="#">IPPD</a>
-            <a class="collapse-item" href="#">LKPJ</a>
-            <a class="collapse-item" href="#">Omspan</a>
-            <a class="collapse-item" href="#">Pertanggungjawaban</a>
-            <a class="collapse-item" href="#">BA Pemeriksaan Kas</a>
-            <a class="collapse-item" href="#">BA Habis Pakai</a>
-            <a class="collapse-item" href="#">Rekap Realisasi APBDes</a>
-            <a class="collapse-item" href="#">Rekap APBDes SumberDana</a>
-            <a class="collapse-item" href="#">Register Penutupan Kas</a>
+            <a class="collapse-item" href="?page=bulanan">Bulanan</a>
+            <a class="collapse-item" href="?page=smt1">Semester 1</a>
+            <a class="collapse-item" href="?page=smt2">Semester 2</a>
+            <a class="collapse-item" href="?page=lppd">LPPD</a>
+            <a class="collapse-item" href="?page=ippd">IPPD</a>
+            <a class="collapse-item" href="?page=lkpj">LKPJ</a>
+            <a class="collapse-item" href="?page=omspan">Omspan</a>
+            <a class="collapse-item" href="?page=tanggungjawab">Pertanggungjawaban</a>
+            <a class="collapse-item" href="?page=ba_kas">BA Pemeriksaan Kas</a>
+            <a class="collapse-item" href="?page=habis_pakai">BA Habis Pakai</a>
+            <a class="collapse-item" href="?page=rekap_apbdes">Rekap Realisasi APBDes</a>
+            <a class="collapse-item" href="?page=rekap_sumberdana">Rekap APBDes SumberDana</a>
+            <a class="collapse-item" href="?page=register_kas">Register Penutupan Kas</a>
+            <a class="collapse-item" href="?page=lain_lain">Lain-lain</a>
           </div>
         </div>
       </li>
@@ -302,6 +304,12 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
   <script src="asset/js/sb-admin-2.min.js"></script>  
   <script src="asset/js/ekko-lightbox.js"></script>
   <script src="asset/js/ekko-lightbox.min.js"></script>
+  <!-- Page level plugins -->
+  <script src="asset/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="asset/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="asset/js/demo/datatables-demo.js"></script>
 
   <script>
     $(".custom-file-input").on("change", function() {
