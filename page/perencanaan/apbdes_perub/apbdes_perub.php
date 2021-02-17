@@ -53,7 +53,14 @@
               <a href="page/perencanaan/apbdes_perub/file/apbdes_perub/<?php echo $data['apbdes_perub']; ?>">
               <i class="fas fa-download" id="downloadapbdes_perub">&nbsp;&nbsp;</i></a><?php echo $data['apbdes_perub']; ?>
             </td>
-            <td><a href="page/perencanaan/apbdes_perub/file/perdes/<?php echo $data['perdes']; ?>"><i class="fas fa-download" id="downloadperdes">&nbsp;&nbsp;</i></a><?php echo $data['perdes']; ?></td>
+            <td>
+              <a href="page/perencanaan/apbdes_perub/file/perdes/<?php echo $data['perdes']; ?>">
+              <i class="fas fa-download" id="downloadperdes">&nbsp;&nbsp;</i></a><?php echo $data['perdes']; ?>
+            </td>
+            <td>
+              <a href="page/perencanaan/apbdes/file/perkades/<?php echo $data['perkades']; ?>">
+              <i class="fas fa-download" id="downloadperkades">&nbsp;&nbsp;</i></a><?php echo $data['perkades']; ?>
+            </td>
 
             <!-- Jika catatan "revisi" kolom berwarna merah kalau "diterima" warna hijau -->
             <?php 
@@ -97,6 +104,7 @@
               data-id_apbdes_perub="<?php echo $data['id_apbdes_perub'];?>"
               data-apbdes_perub="<?php echo $data['apbdes_perub'];?>"
               data-perdes="<?php echo $data['perdes'];?>"
+              data-perkades="<?php echo $data['perkades'];?>"
               ><i class="fas fa-edit"></i> edit</a>
 
               <a href="page/perencanaan/apbdes_perub/hapus.php?id_apbdes_perub=<?php echo $data['id_apbdes_perub'];?>" onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
@@ -193,6 +201,22 @@ uploadField.onchange = function() {
             return false;
         }
     };
+
+  var uploadField = document.getElementById("perkades");
+  uploadField.onchange = function() {
+    if(this.files[0].size > 5000000){ // ini untuk ukuran 800KB, 1000000 untuk 1 MB.
+       alert("Maaf. File Terlalu Besar ! Maksimal Upload 5 MB");
+       this.value = "";
+    };
+        var inputFile = document.getElementById('perkades');
+        var pathFile = inputFile.value;
+        var ekstensiOk = /(\.pdf|\.xlsx|\.xls|\.doc|\.docx)$/i;
+        if(!ekstensiOk.exec(pathFile)){
+            alert('Silahkan upload file yang memiliki ekstensi .pdf.xlxs.docx');
+            inputFile.value = '';
+            return false;
+        }
+    };
 </script>
 
 <!-- Modal edit apbdes_perub -->
@@ -227,7 +251,7 @@ uploadField.onchange = function() {
           <div class="form-group">
           <label for="perkades">Perkades APBDes Perubahan</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="perkades" id="Perkades" onchange="return validasiFile()"/>
+              <input type="file" class="custom-file-input" name="perkades" id="perka" onchange="return validasiFile()"/>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
@@ -250,6 +274,7 @@ uploadField.onchange = function() {
     var id_apbdes_perub = $(this).attr('data-id_apbdes_perub')
     var apbdes_perub = $(this).attr('data-apbdes_perub')
     var perdes = $(this).attr('data-perdes')
+    var perkades = $(this).attr('data-perkades')
     var id_user = $(this).attr('data-iduser')
     var tahun = $(this).attr('data-tahun')
     var validasi = $(this).attr('data-validasi')
@@ -257,6 +282,7 @@ uploadField.onchange = function() {
     $('#id_apbdes_perub').val(id_apbdes_perub)
     $('#rpjm').val(apbdes_perub)
     $('#perd').val(perdes)
+    $('#perka').val(perkades)
     $('#iduser').val(id_user)
     $('#tahun').val(tahun)
     $('#validasi').val(validasi)
@@ -288,6 +314,22 @@ uploadField.onchange = function() {
        this.value = "";
     };
         var inputFile = document.getElementById('perd');
+        var pathFile = inputFile.value;
+        var ekstensiOk = /(\.pdf|\.xlsx|\.xls|\.doc|\.docx)$/i;
+        if(!ekstensiOk.exec(pathFile)){
+            alert('Silahkan upload file yang memiliki ekstensi .pdf.xlxs.docx');
+            inputFile.value = '';
+            return false;
+        }
+    };
+
+  var uploadField = document.getElementById("perka");
+  uploadField.onchange = function() {
+    if(this.files[0].size > 5000000){ // ini untuk ukuran 800KB, 1000000 untuk 1 MB.
+       alert("Maaf. File Terlalu Besar ! Maksimal Upload 5 MB");
+       this.value = "";
+    };
+        var inputFile = document.getElementById('perka');
         var pathFile = inputFile.value;
         var ekstensiOk = /(\.pdf|\.xlsx|\.xls|\.doc|\.docx)$/i;
         if(!ekstensiOk.exec(pathFile)){
