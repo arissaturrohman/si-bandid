@@ -207,7 +207,6 @@ uploadField.onchange = function() {
     var catatan = $(this).attr('data-catatan')
     $('#id_lppd').val(id_lppd)
     $('#lppdid').val(lppd)
-    $('#perd').val(perdes)
     $('#iduser').val(id_user)
     $('#tahun').val(tahun)
     $('#validasi').val(validasi)
