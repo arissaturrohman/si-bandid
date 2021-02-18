@@ -9,6 +9,9 @@ include "asset/inc/config.php";
 
 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 
+$uri_path = "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$uri_segments = explode('/', $uri_path);
+$uri_segments[4];
 ?>
 
 
@@ -60,7 +63,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
+      <li class="nav-item <?php if ($uri_segments[4] == "index.php") {echo 'active';} ?>">
         <a class="nav-link" href="index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
@@ -75,7 +78,13 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
       </div>
 
       <!-- Nav Item - Perencanaan Collapse Menu -->
-      <li class="nav-item">
+      <li class="nav-item
+      <?php
+        if ($uri_segments[4] == "index.php?page=rpjmdes") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=rkpdes") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=apbdes") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=apbdes_perub") {echo 'active';}
+      ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapserencana" aria-expanded="true" aria-controls="collapserencana">
           <i class="fas fa-fw fa-edit"></i>
           <span>Perencanaan</span>
@@ -83,16 +92,26 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
         <div id="collapserencana" class="collapse" aria-labelledby="headingrencana" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Perencanaan:</h6>
-            <a class="collapse-item" href="?page=rpjmdes">RPJMDes</a>
-            <a class="collapse-item" href="?page=rkpdes">RKPDes</a>
-            <a class="collapse-item" href="?page=apbdes">APBDes</a>
-            <a class="collapse-item" href="?page=apbdes_perub">APBDes Perubahan</a>
+            <h6 class="collapse-header">Custom Perencanaan:</h6>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=rpjmdes") {echo 'active';} ?>" href="?page=rpjmdes">RPJMDes</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=rkpdes") {echo 'active';} ?>" href="?page=rkpdes">RKPDes</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=apbdes") {echo 'active';} ?>" href="?page=apbdes">APBDes</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=apbdes_perub") {echo 'active';} ?>" href="?page=apbdes_perub">APBDes Perubahan</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Pelaksanaan Collapse Menu -->
-      <li class="nav-item">
+      <li class="nav-item
+      <?php
+        if ($uri_segments[4] == "index.php?page=rpd") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=p_dd") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=p_add") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=p_pad") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=p_apbdes") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=retribusi") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=sk") {echo 'active';}
+      ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsepelaksanaan" aria-expanded="true" aria-controls="collapsepelaksanaan">
           <i class="fas fa-fw fa-table"></i>
           <span>Pelaksanaan</span>
@@ -100,19 +119,35 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
         <div id="collapsepelaksanaan" class="collapse" aria-labelledby="headingpelaksanaan" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Pelaksanaan:</h6>
-            <a class="collapse-item" href="?page=rpd">RPD</a>
-            <a class="collapse-item" href="?page=p_dd">Realisasi DD</a>
-            <a class="collapse-item" href="?page=p_add">Realisasi ADD</a>
-            <a class="collapse-item" href="?page=p_pad">Realisasi PAD</a>
-            <a class="collapse-item" href="?page=p_apbdes">Realisasi APBDes</a>
-            <a class="collapse-item" href="?page=retribusi">Retribusi</a>
-            <a class="collapse-item" href="?page=sk">SK PKPKD / PPKD</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=rpd") {echo 'active';} ?>" href="?page=rpd">RPD</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=p_dd") {echo 'active';} ?>" href="?page=p_dd">Realisasi DD</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=p_add") {echo 'active';} ?>" href="?page=p_add">Realisasi ADD</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=p_pad") {echo 'active';} ?>" href="?page=p_pad">Realisasi PAD</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=p_apbdes") {echo 'active';} ?>" href="?page=p_apbdes">Realisasi APBDes</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=retribusi") {echo 'active';} ?>" href="?page=retribusi">Retribusi</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=sk") {echo 'active';} ?>" href="?page=sk">SK PKPKD / PPKD</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Pelaporan Collapse Menu -->
-      <li class="nav-item">
+      <li class="nav-item
+      <?php
+        if ($uri_segments[4] == "index.php?page=bulanan") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=smt1") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=smt2") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=lppd") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=ippd") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=lkpj") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=omspan") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=tanggungjawab") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=ba_kas") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=habis_pakai") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=rekap_apbdes") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=rekap_sumberdana") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=register_kas") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=lain_lain") {echo 'active';}
+      ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapselaporan" aria-expanded="true" aria-controls="collapselaporan">
           <i class="fas fa-fw fa-chart-line"></i>
           <span>Pelaporan</span>
@@ -120,20 +155,20 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
         <div id="collapselaporan" class="collapse" aria-labelledby="headinglaporan" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Pelaporan:</h6>
-            <a class="collapse-item" href="?page=bulanan">Bulanan</a>
-            <a class="collapse-item" href="?page=smt1">Semester 1</a>
-            <a class="collapse-item" href="?page=smt2">Semester 2</a>
-            <a class="collapse-item" href="?page=lppd">LPPD</a>
-            <a class="collapse-item" href="?page=ippd">IPPD</a>
-            <a class="collapse-item" href="?page=lkpj">LKPJ</a>
-            <a class="collapse-item" href="?page=omspan">Omspan</a>
-            <a class="collapse-item" href="?page=tanggungjawab">Pertanggungjawaban</a>
-            <a class="collapse-item" href="?page=ba_kas">BA Pemeriksaan Kas</a>
-            <a class="collapse-item" href="?page=habis_pakai">BA Habis Pakai</a>
-            <a class="collapse-item" href="?page=rekap_apbdes">Rekap Realisasi APBDes</a>
-            <a class="collapse-item" href="?page=rekap_sumberdana">Rekap APBDes SumberDana</a>
-            <a class="collapse-item" href="?page=register_kas">Register Penutupan Kas</a>
-            <a class="collapse-item" href="?page=lain_lain">Lain-lain</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=bulanan") {echo 'active';} ?>" href="?page=bulanan">Bulanan</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=smt1") {echo 'active';} ?>" href="?page=smt1">Semester 1</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=smt2") {echo 'active';} ?>" href="?page=smt2">Semester 2</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=lppd") {echo 'active';} ?>" href="?page=lppd">LPPD</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=ippd") {echo 'active';} ?>" href="?page=ippd">IPPD</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=lkpj") {echo 'active';} ?>" href="?page=lkpj">LKPJ</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=omspan") {echo 'active';} ?>" href="?page=omspan">Omspan</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=tanggungjawab") {echo 'active';} ?>" href="?page=tanggungjawab">Pertanggungjawaban</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=ba_kas") {echo 'active';} ?>" href="?page=ba_kas">BA Pemeriksaan Kas</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=habis_pakai") {echo 'active';} ?>" href="?page=habis_pakai">BA Habis Pakai</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=rekap_apbdes") {echo 'active';} ?>" href="?page=rekap_apbdes">Rekap Realisasi APBDes</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=rekap_sumberdana") {echo 'active';} ?>" href="?page=rekap_sumberdana">Rekap APBDes SumberDana</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=register_kas") {echo 'active';} ?>" href="?page=register_kas">Register Penutupan Kas</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=lain_lain") {echo 'active';} ?>" href="?page=lain_lain">Lain-lain</a>
           </div>
         </div>
       </li>
@@ -147,7 +182,12 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
       </div>
 
       <!-- Nav Item - Setting Collapse Menu -->
-      <li class="nav-item">
+      <li class="nav-item
+      <?php
+        if ($uri_segments[4] == "index.php?page=profile") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=ganti_pass") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=user") {echo 'active';}
+      ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesetting" aria-expanded="true" aria-controls="collapsesetting">
           <i class="fas fa-fw fa-cogs"></i>
           <span>Settings</span>
@@ -155,12 +195,12 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
         <div id="collapsesetting" class="collapse" aria-labelledby="headingsetting" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Pengaturan:</h6>
-            <a class="collapse-item" href="?page=profile">Profile</a>
-            <a class="collapse-item" href="?page=ganti_pass">Ganti Password</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=profile") {echo 'active';} ?>" href="?page=profile">Profile</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=ganti_pass") {echo 'active';} ?>" href="?page=ganti_pass">Ganti Password</a>
             <!-- Tombol users tampil jika login admin -->
             <?php 
                 if ($_SESSION['level']=="admin") {
-                 echo ''?><a class="collapse-item" href="?page=user">Users</a>
+                 echo ''?><a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=user") {echo 'active';} ?>" href="?page=user">Users</a>
             <?php  ;
             }else{
              echo '';
@@ -217,11 +257,11 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="?page=profile">
+                <a class="dropdown-item <?php if ($uri_segments[4] == "index.php?page=profile") {echo 'active';} ?>" href="?page=profile">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>
-                <a class="dropdown-item" href="?page=ganti_pass">
+                <a class="dropdown-item <?php if ($uri_segments[4] == "index.php?page=ganti_pass") {echo 'active';} ?>" href="?page=ganti_pass">
                   <i class="fas fa-unlock fa-sm fa-fw mr-2 text-gray-400"></i>
                   Ganti Password
                 </a>
