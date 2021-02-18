@@ -93,7 +93,6 @@
               <a href="#" class="btn btn-sm btn-info edit" data-toggle="modal" data-target="#edit_rpdModal"
               data-id_rpd="<?php echo $data['id_rpd'];?>"
               data-rpd="<?php echo $data['rpd'];?>"
-              data-perdes="<?php echo $data['perdes'];?>"
               ><i class="fas fa-edit"></i> edit</a>
 
               <a href="page/pelaksanaan/rpd/hapus.php?id_rpd=<?php echo $data['id_rpd'];?>" onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> delete</a>
@@ -180,7 +179,7 @@ uploadField.onchange = function() {
           <div class="form-group">
           <label for="rpd">File RPD</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="rpd" id="rpjm" onchange="return validasiFile()"/>
+              <input type="file" class="custom-file-input" name="rpd" id="rpdid" onchange="return validasiFile()"/>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
@@ -202,13 +201,12 @@ uploadField.onchange = function() {
     $('#edit_rpdModal').modal();
     var id_rpd = $(this).attr('data-id_rpd')
     var rpd = $(this).attr('data-rpd')
-    var perdes = $(this).attr('data-perdes')
     var id_user = $(this).attr('data-iduser')
     var tahun = $(this).attr('data-tahun')
     var validasi = $(this).attr('data-validasi')
     var catatan = $(this).attr('data-catatan')
     $('#id_rpd').val(id_rpd)
-    $('#rpjm').val(rpd)
+    $('#rpdid').val(rpd)
     $('#perd').val(perdes)
     $('#iduser').val(id_user)
     $('#tahun').val(tahun)
@@ -218,29 +216,13 @@ uploadField.onchange = function() {
 </script>
 
 <script type="text/javascript">
-var uploadField = document.getElementById("rpjm");
+var uploadField = document.getElementById("rpdid");
 uploadField.onchange = function() {
     if(this.files[0].size > 5000000){ // ini untuk ukuran 800KB, 1000000 untuk 1 MB.
        alert("Maaf. File Terlalu Besar ! Maksimal Upload 5 MB");
        this.value = "";
     };
-        var inputFile = document.getElementById('rpjm');
-        var pathFile = inputFile.value;
-        var ekstensiOk = /(\.pdf|\.xlsx|\.xls|\.doc|\.docx)$/i;
-        if(!ekstensiOk.exec(pathFile)){
-            alert('Silahkan upload file yang memiliki ekstensi .pdf.xlxs.docx');
-            inputFile.value = '';
-            return false;
-        }
-    };
-
-  var uploadField = document.getElementById("perd");
-  uploadField.onchange = function() {
-    if(this.files[0].size > 5000000){ // ini untuk ukuran 800KB, 1000000 untuk 1 MB.
-       alert("Maaf. File Terlalu Besar ! Maksimal Upload 5 MB");
-       this.value = "";
-    };
-        var inputFile = document.getElementById('perd');
+        var inputFile = document.getElementById('rpdid');
         var pathFile = inputFile.value;
         var ekstensiOk = /(\.pdf|\.xlsx|\.xls|\.doc|\.docx)$/i;
         if(!ekstensiOk.exec(pathFile)){
