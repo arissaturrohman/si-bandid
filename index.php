@@ -92,7 +92,6 @@ $uri_segments[4];
         <div id="collapserencana" class="collapse" aria-labelledby="headingrencana" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Perencanaan:</h6>
-            <h6 class="collapse-header">Custom Perencanaan:</h6>
             <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=rpjmdes") {echo 'active';} ?>" href="?page=rpjmdes">RPJMDes</a>
             <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=rkpdes") {echo 'active';} ?>" href="?page=rkpdes">RKPDes</a>
             <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=apbdes") {echo 'active';} ?>" href="?page=apbdes">APBDes</a>
