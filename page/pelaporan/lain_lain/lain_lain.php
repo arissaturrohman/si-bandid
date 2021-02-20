@@ -30,7 +30,7 @@
             if ($_SESSION['level']=="user") {
               $id_user = $_SESSION['id_user'];
               $query= "SELECT * FROM tb_lain
-                        INNER JOIN tb_user ON tb_lain.id_user = tb_user.id_user AND tb_lain_lain.id_user=$id_user AND tahun='$tahun' ORDER BY id_lain_lain DESC";
+                        INNER JOIN tb_user ON tb_lain.id_user = tb_user.id_user AND tb_lain.id_user=$id_user AND tahun='$tahun' ORDER BY id_lain_lain DESC";
               $result = mysqli_query($koneksi, $query);
             }  
               //mengecek apakah ada error ketika menjalankan query

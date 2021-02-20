@@ -26,7 +26,7 @@ $uri_segments[4];
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Si Bandid</title>
+  <title>Si Bandid | Aplikasi Pembinaan Administrasi Desa</title>
 
   <!-- Custom fonts for this template-->
   <link href="asset/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -196,6 +196,7 @@ $uri_segments[4];
             <h6 class="collapse-header">Custom Pengaturan:</h6>
             <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=profile") {echo 'active';} ?>" href="?page=profile">Profile</a>
             <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=ganti_pass") {echo 'active';} ?>" href="?page=ganti_pass">Ganti Password</a>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=backup") {echo 'active';} ?>" href="?page=backup">Backup & Restore</a>
             <!-- Tombol users tampil jika login admin -->
             <?php 
                 if ($_SESSION['level']=="admin") {

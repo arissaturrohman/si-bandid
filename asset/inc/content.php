@@ -161,6 +161,10 @@ if ($page == "rpjmdes") {
   if ($action == '') {
     include "page/setting/ganti_pass.php";
   }
+ } elseif ($page == "backup") {
+  if ($action == '') {
+    include "page/setting/backup.php";
+  }
  } elseif ($page == "user") {
   if ($action == '') {
     include "page/setting/user.php";
