@@ -185,6 +185,7 @@ $uri_segments[4];
       <?php
         if ($uri_segments[4] == "index.php?page=profile") {echo 'active';}
         elseif ($uri_segments[4] == "index.php?page=ganti_pass") {echo 'active';}
+        elseif ($uri_segments[4] == "index.php?page=backup") {echo 'active';}
         elseif ($uri_segments[4] == "index.php?page=user") {echo 'active';}
       ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesetting" aria-expanded="true" aria-controls="collapsesetting">
