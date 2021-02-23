@@ -197,11 +197,12 @@ $uri_segments[4];
             <h6 class="collapse-header">Custom Pengaturan:</h6>
             <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=profile") {echo 'active';} ?>" href="?page=profile">Profile</a>
             <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=ganti_pass") {echo 'active';} ?>" href="?page=ganti_pass">Ganti Password</a>
-            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=backup") {echo 'active';} ?>" href="?page=backup">Backup & Restore</a>
-            <!-- Tombol users tampil jika login admin -->
             <?php 
                 if ($_SESSION['level']=="admin") {
-                 echo ''?><a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=user") {echo 'active';} ?>" href="?page=user">Users</a>
+                 echo ''?>
+            <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=backup") {echo 'active';} ?>" href="?page=backup">Backup & Restore</a>
+            <!-- Tombol users tampil jika login admin -->
+                 <a class="collapse-item <?php if ($uri_segments[4] == "index.php?page=user") {echo 'active';} ?>" href="?page=user">Users</a>
             <?php  ;
             }else{
              echo '';
@@ -296,7 +297,7 @@ $uri_segments[4];
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Si-Bandid 2020 - <?= date("Y"); ?></span>
+            <span>Copyright &copy; <a href="http://kecmranggen.demakkab.go.id/" target="_blank"> Kecamatan Mranggen</a> 2020 - <?= date("Y"); ?></span>
           </div>
         </div>
       </footer>
@@ -318,12 +319,12 @@ $uri_segments[4];
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Yakin keluar?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Klik "Logout" jika yakin untuk mengakhiri sesi ini.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
           <a class="btn btn-primary" href="logout.php">Logout</a>

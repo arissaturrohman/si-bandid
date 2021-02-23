@@ -52,7 +52,8 @@
               <a href="page/perencanaan/rpjmdes/file/rpjmdes/<?php echo $data['rpjmdes']; ?>">
               <i class="fas fa-download" id="downloadrpjmdes">&nbsp;&nbsp;</i></a><?php echo $data['rpjmdes']; ?>
             </td>
-            <td><a href="page/perencanaan/rpjmdes/file/perdes/<?php echo $data['perdes']; ?>"><i class="fas fa-download" id="downloadperdes">&nbsp;&nbsp;</i></a><?php echo $data['perdes']; ?></td>
+            <td><a href="page/perencanaan/rpjmdes/file/perdes/<?php echo $data['perdes']; ?>"><i class="fas fa-download" id="downloadperdes">&nbsp;&nbsp;</i></a><?php echo $data['perdes']; ?>
+            </td>
 
             <!-- Jika catatan "revisi" kolom berwarna merah kalau "diterima" warna hijau -->
             <?php 
