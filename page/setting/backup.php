@@ -14,23 +14,25 @@
       <div class="tab-pane fade show active" id="backup" role="tabpanel" aria-labelledby="backup-tab">
         <div class="my-4">
           <p><b>Backup</b> semua data yang ada didalam database.</p>
-          <button type="submit" class="btn tbn-sm btn-info">Backup</button>
+           <form class="" method="post" action="./page/setting/proses_backup.php">
+              <button type="submit" class="btn tbn-sm btn-info" name="backup">Start Backup</button>
+          </form>
         </div>
       </div>
       <div class="tab-pane fade" id="restore" role="tabpanel" aria-labelledby="restore-tab">
         <div class="my-4">
           <p><b>Restore</b> semua data yang ada didalam database.</p>
-          <p>File Backup Database (*.sql)</p>
-          <form action="" method="post">
-            <div class="form-row">
+          <!-- <p>File Backup Database (*.sql)</p> -->
+          <form action="./page/setting/proses_restore.php" method="post">
+            <!-- <div class="form-row">
               <div class="form-group col-6">
                 <div class="custom-file">
                   <input type="file" class="custom-file-input" id="customFile">
                   <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
               </div>
-            </div>
-            <button type="submit" class="btn tbn-sm btn-info">Restore</button>
+            </div> -->
+            <button type="submit" class="btn tbn-sm btn-success" name="restore">Start Restore</button>
           </form>
         </div>
       </div>
